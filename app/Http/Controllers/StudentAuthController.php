@@ -1,0 +1,74 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Models\Student;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
+
+class StudentAuthController extends Controller
+{
+    /* ============ REGISTRACE ============ */
+
+    public function showRegister()
+    {
+        return view('student.auth.register');
+    }
+
+    public function register(Request $request)
+{
+    $data = $request->validate([
+        'name'       => ['required','string','max:255'],
+        'email'      => ['required','email',
+                         Rule::unique((new Student)->getTable())],
+        'birth_year' => ['required','integer','digits:4','between:1900,'.date('Y')],
+        'password'   => ['required','confirmed',
+                         Password::min(8)->letters()->numbers()],
+    ]);
+
+    $student = Student::create([
+        'name'       => $data['name'],
+        'email'      => $data['email'],
+        'birth_year' => $data['birth_year'],
+        'password'   => Hash::make($data['password']),
+        'profile_picture'=> 'student.jpg', 
+    ]);
+
+    Auth::guard('student')->login($student);
+
+    return redirect()
+        ->route('student.dashboard')
+        ->with('success', 'Vítej! Tvůj účet byl úspěšně vytvořen.');
+    }
+
+
+    /* ============ LOGIN ============ */
+    public function login(Request $request)
+    {
+        $cred = $request->validate([
+            'email'    => ['required','email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::guard('student')->attempt($cred, $request->boolean('remember'))) {
+
+            $request->session()->regenerate();
+
+            /* <-- ZELENÝ banner po úspěšném přihlášení */
+            return redirect()
+                   ->intended('/student/dashboard')
+                   ->with('success', 'Přihlášení proběhlo v pořádku.');
+        }
+
+        /* <-- ČERVENÝ banner při neplatných údajích */
+        return back()
+               ->withInput()
+               ->with('error', 'Neplatné přihlašovací údaje.');
+    }
+
+    /* logout a další metody beze změn ... */
+}

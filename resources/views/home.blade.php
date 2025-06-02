@@ -12,7 +12,7 @@
         </p>
 
         <div class="space-x-2">
-            <a href="" class="btn btn-primary">Začít zdarma</a>
+            <a href="{{ route('student.register.show') }}" class="btn btn-primary">Začít zdarma</a>
             <a href=""    class="btn btn-outline">Přihlásit se</a>
         </div>
     </div>

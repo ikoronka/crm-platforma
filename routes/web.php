@@ -1,15 +1,39 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CoachAuthController;   // ← přesný import
+use App\Http\Controllers\StudentAuthController;
+use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest')->group(function () {
-    Route::get('/login',  [AuthController::class, 'showLogin'])->name('login');
-    Route::post('/login', [AuthController::class, 'login']);
+Route::view('/', 'home');
 
-    Route::get('/register',  [AuthController::class, 'showRegister'])->name('register');
-    Route::post('/register', [AuthController::class, 'register']);
+/* ==================  COACH  ================== */
+Route::prefix('coach')->name('coach.')->group(function () {
+
+    Route::middleware('guest:coach')->group(function () {
+        Route::get('login',    [CoachAuthController::class,'showLogin'])->name('login.show');
+        Route::get('register', [CoachAuthController::class,'showRegister'])->name('register.show');
+        Route::post('login',    [CoachAuthController::class,'login'])->name('login');
+        Route::post('register', [CoachAuthController::class,'register'])->name('register');
+    });
+
+    Route::middleware('auth:coach')->group(function () {
+        Route::view('dashboard', 'coach.dashboard')->name('dashboard');
+        Route::post('logout', [CoachAuthController::class,'logout'])->name('logout');
+    });
 });
 
-Route::post('/logout', [AuthController::class, 'logout'])
-      ->middleware('auth')
-      ->name('logout');
+/* ==================  STUDENT  ================== */
+Route::prefix('student')->name('student.')->group(function () {
+
+    Route::middleware('guest:student')->group(function () {
+        Route::get('login',    [StudentAuthController::class,'showLogin'])->name('login.show');
+        Route::get('register', [StudentAuthController::class,'showRegister'])->name('register.show');
+        Route::post('login',    [StudentAuthController::class,'login'])->name('login');
+        Route::post('register', [StudentAuthController::class,'register'])->name('register');
+    });
+
+    Route::middleware('auth:student')->group(function () {
+        Route::view('dashboard', 'student.dashboard')->name('dashboard');
+        Route::post('logout', [StudentAuthController::class,'logout'])->name('logout');
+    });
+});
