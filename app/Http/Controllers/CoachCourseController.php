@@ -8,42 +8,113 @@ use App\Models\Course;
 class CoachCourseController extends Controller
 {
     /**
-     * Dashboard – vypíše kurzy, které kouč vyučuje.
+     * Zobrazí seznam kurzů, které daný kouč vyučuje.
      */
-    public function myCourses(Request $request)
+    public function index(Request $request)
     {
+        // Přihlášený kouč (guard: coach)
         $coach = $request->user('coach');
 
-        // Načteme všechny kurzy patřící přihlášenému kouči
+        // Načteme všechny kurzy, kde coach_id = $coach->id
         $courses = $coach->courses()->get();
 
         return view('coach.dashboard', compact('courses'));
     }
 
     /**
-     * Open courses – (pokud by bylo potřeba) kurzy, které kouč už ještě nevyučuje.
+     * Zobrazí formulář pro vytvoření nového kurzu.
      */
-    public function openCourses(Request $request)
+    public function create()
     {
-        $coach = $request->user('coach');
+        return view('coach.courses.create');
+    }
 
-        // Příklad (předpokládá pivotovou tabulku nebo sloupec coach_id):
-        // $assignedIds = $coach->courses()->pluck('courses.id');
-        // $courses = Course::whereNotIn('id', $assignedIds)->get();
+    public function edit(Course $course)
+    {
+        // Ověříme, že kurz opravdu patří přihlášenému kouči (abezpečení):
+        $coach = auth('coach')->user();
+        if ($course->coach_id !== $coach->id) {
+            abort(403);
+        }
 
-        $courses = collect(); // prozatím prázdná kolekce
-
-        return view('coach.open-courses', compact('courses'));
+        // Vrať view s předvyplněnými hodnotami kurzu
+        return view('coach.courses.edit', compact('course'));
     }
 
     /**
-     * Manage (detail) – zobrazí detail konkrétního kurzu pro kouče.
+     * Zpracuje odeslaný formulář pro úpravu a uloží změny do DB.
+     */
+    public function update(Request $request, Course $course)
+    {
+        // Ověření vlastníka (jen kouč, který kurz vytvořil, může upravovat)
+        $coach = auth('coach')->user();
+        if ($course->coach_id !== $coach->id) {
+            abort(403);
+        }
+
+        // Validace vstupních dat (podobná jako ve store())
+        $data = $request->validate([
+            'name'          => ['required', 'string', 'max:255'],
+            'template_id'   => ['nullable', 'integer', 'exists:z_course_templates,id'],
+            'start_date'    => ['nullable', 'date'],
+            'end_date'      => ['nullable', 'date', 'after_or_equal:start_date'],
+            'schedule_info' => ['nullable', 'string'],
+        ]);
+
+        // Aktualizace atributů
+        $course->name          = $data['name'];
+        $course->template_id   = $data['template_id'] ?? null;
+        $course->start_date    = $data['start_date'] ?? null;
+        $course->end_date      = $data['end_date'] ?? null;
+        $course->schedule_info = $data['schedule_info'] ?? null;
+
+        // Uložíme do DB (updated_at se vyplní automaticky)
+        $course->save();
+
+        return redirect()
+            ->route('coach.courses.manage', $course)
+            ->with('success', 'Kurz byl úspěšně upraven.');
+    }
+
+    /**
+     * Zpracuje odeslaný formulář a uloží nový kurz.
+     */
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'name'          => ['required', 'string', 'max:255'],
+            'template_id'   => ['nullable', 'integer', 'exists:z_course_templates,id'],
+            'start_date'    => ['nullable', 'date'],
+            'end_date'      => ['nullable', 'date', 'after_or_equal:start_date'],
+            'schedule_info' => ['nullable', 'string'],
+        ]);
+
+        // Přihlášený kouč
+        $coach = $request->user('coach');
+
+        // Vložíme nový řádek do tabulky z_courses; timestamps (created_at/updated_at) Eloquent vyplní automaticky
+        $course = Course::create([
+            'name'          => $data['name'] ?? null,
+            'template_id'   => $data['template_id'] ?? null,
+            'coach_id'      => $coach->id,
+            'start_date'    => $data['start_date'] ?? null,
+            'end_date'      => $data['end_date'] ?? null,
+            'schedule_info' => $data['schedule_info'] ?? null,
+        ]);
+
+        return redirect()
+            ->route('coach.courses.manage', $course)
+            ->with('success', 'Kurz úspěšně vytvořen.');
+    }
+
+    /**
+     * Zobrazí detail/správu jednoho kurzu.
      */
     public function manage(Course $course)
     {
-        // Eager‐load lessons a students, pokud máte vztahy nastavené v modelu
+        // Nahrajeme k danému kurzu všechny lekce a studenty, aby byly k dispozici ve View
         $course->load(['lessons', 'students']);
 
-        return view('coach.course-detail', compact('course'));
+        return view('coach.courses.course-detail', compact('course'));
     }
 }

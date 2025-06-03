@@ -5,7 +5,13 @@
 @section('title', 'Coach Dashboard')
 
 @section('coach-content')
-    <h1 class="text-3xl font-bold mb-8 text-white">Courses you are instructing:</h1>
+    <div class="flex justify-between items-center mb-8">
+        <h1 class="text-3xl font-bold">Courses you are instructing:</h1>
+        <a href="{{ route('coach.courses.create') }}" 
+           class="btn btn-primary btn-sm">
+            Add course
+        </a>
+    </div>
 
     <div class="space-y-6">
         @forelse($courses as $course)

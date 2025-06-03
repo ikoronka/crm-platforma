@@ -5,7 +5,7 @@
 @section('title', 'Coach Profile')
 
 @section('coach-content')
-    <h1 class="text-3xl font-bold mb-8 text-white">Profile Settings (Coach)</h1>
+    <h1 class="text-3xl font-bold mb-8">Profile Settings (Coach)</h1>
 
     <form method="POST" action="{{ route('coach.profile.update') }}" class="space-y-6 max-w-lg">
         @csrf
@@ -16,7 +16,7 @@
             <span class="label-text">Name</span>
             <input name="name" type="text"
                    value="{{ old('name', $coach->name ?? '') }}"
-                   class="input input-bordered w-full text-gray-900" required>
+                   class="text-white input input-bordered w-full text-gray-900" required>
             @error('name') <span class="text-error text-sm">{{ $message }}</span> @enderror
         </label>
 
@@ -25,7 +25,7 @@
             <span class="label-text">E-mail</span>
             <input name="email" type="email"
                    value="{{ old('email', $coach->email ?? '') }}"
-                   class="input input-bordered w-full text-gray-900" required>
+                   class="text-white input input-bordered w-full text-gray-900" required>
             @error('email') <span class="text-error text-sm">{{ $message }}</span> @enderror
         </label>
 
