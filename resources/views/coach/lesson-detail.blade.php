@@ -10,9 +10,9 @@
         {{-- Hlavička: Název lekce + tlačítko „Back“ --}}
         <div class="flex justify-between items-center">
             <div>
-                <h1 class="text-4xl font-bold text-white">{{ $lesson->title }}</h1>
+                <h1 class="text-4xl font-bold">{{ $lesson->title }}</h1>
                 @if($lesson->scheduled_at)
-                    <p class="text-sm opacity-60 text-white">Scheduled: {{ $lesson->scheduled_at->format('j.n.Y H:i') }}</p>
+                    <p class="text-sm opacity-60">Scheduled: {{ $lesson->scheduled_at->format('j.n.Y H:i') }}</p>
                 @endif
             </div>
             <a href="{{ route('coach.courses.manage', $lesson->course) }}"
@@ -23,9 +23,9 @@
 
         {{-- Popis lekce --}}
         <section class="bg-base-100 p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-semibold mb-2 text-white">Lesson Description</h2>
+            <h2 class="text-2xl font-semibold mb-2">Lesson Description</h2>
             @if(trim($lesson->description))
-                <p class="text-sm leading-relaxed text-white whitespace-pre-line">
+                <p class="text-sm leading-relaxed whitespace-pre-line">
                     {{ $lesson->description }}
                 </p>
             @else
@@ -54,7 +54,7 @@
 
         {{-- Seznam odevzdaných úkolů studentů --}}
         <section>
-            <h2 class="text-2xl font-semibold mb-4 text-white">Student Submissions</h2>
+            <h2 class="text-2xl font-semibold mb-4">Student Submissions</h2>
 
             @if($lesson->submissions->isEmpty())
                 <p class="text-sm opacity-60 text-white">No submissions yet.</p>

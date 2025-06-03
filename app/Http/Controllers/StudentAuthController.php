@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
+use App\Mail\StudentRegistered;
+use Illuminate\Support\Facades\Mail;
+
 
 class StudentAuthController extends Controller
 {
@@ -23,28 +26,29 @@ class StudentAuthController extends Controller
     public function register(Request $request)
 {
     $data = $request->validate([
-        'name'       => ['required','string','max:255'],
-        'email'      => ['required','email',
-                         Rule::unique((new Student)->getTable())],
-        'birth_year' => ['required','integer','digits:4','between:1900,'.date('Y')],
-        'password'   => ['required','confirmed',
-                         Password::min(8)->letters()->numbers()],
+        'name'       => ['required', 'string', 'max:255'],
+        'email'      => ['required', 'email', Rule::unique((new Student)->getTable())],
+        'birth_year' => ['required', 'integer', 'digits:4', 'between:1900,'.date('Y')],
+        'password'   => ['required','confirmed', Password::min(8)->letters()->numbers()],
     ]);
 
     $student = Student::create([
-        'name'       => $data['name'],
-        'email'      => $data['email'],
-        'birth_year' => $data['birth_year'],
-        'password'   => Hash::make($data['password']),
-        'profile_picture'=> 'student.jpg', 
+        'name'            => $data['name'],
+        'email'           => $data['email'],
+        'birth_year'      => $data['birth_year'],
+        'password'        => Hash::make($data['password']),
+        'profile_picture' => 'student.jpg',
     ]);
+
+    // Odeslání uvítacího e-mailu:
+    Mail::to($student->email)->send(new StudentRegistered($student));
 
     Auth::guard('student')->login($student);
 
     return redirect()
         ->route('student.dashboard')
         ->with('success', 'Vítej! Tvůj účet byl úspěšně vytvořen.');
-    }
+}
 
 
     /* ============ LOGIN ============ */

@@ -35,11 +35,11 @@
             <div class="collapse-content space-y-4">
                 <label class="form-control">
                     <span class="label-text">New password</span>
-                    <input name="password" type="password" class="input input-bordered w-full text-gray-900">
+                    <input name="password" type="password" class="text-white input input-bordered w-full text-gray-900">
                 </label>
                 <label class="form-control">
                     <span class="label-text">Confirm password</span>
-                    <input name="password_confirmation" type="password" class="input input-bordered w-full text-gray-900">
+                    <input name="password_confirmation" type="password" class="text-white input input-bordered w-full text-gray-900">
                 </label>
                 @error('password')
                     <span class="text-error text-sm">{{ $message }}</span>
