@@ -12,6 +12,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use App\Mail\StudentRegistered;
 use Illuminate\Support\Facades\Mail;
+use Laravel\Socialite\Facades\Socialite;
 
 
 class StudentAuthController extends Controller
@@ -48,7 +49,30 @@ class StudentAuthController extends Controller
     return redirect()
         ->route('student.dashboard')
         ->with('success', 'Vítej! Tvůj účet byl úspěšně vytvořen.');
-}
+    }
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleGoogleCallback()
+    {
+        $googleUser = Socialite::driver('google')->stateless()->user();
+
+        // Find or create the student in your DB
+        $student = Student::firstOrCreate(
+            ['email' => $googleUser->getEmail()],
+            [
+                'name'            => $googleUser->getName(),
+                'oauth_provider'  => 'google',
+                'profile_picture' => $googleUser->getAvatar(),
+            ]
+        );
+
+        Auth::guard('student')->login($student);
+
+        return redirect()->route('student.dashboard');
+    }
 
 
     /* ============ LOGIN ============ */
