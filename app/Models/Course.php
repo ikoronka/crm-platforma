@@ -19,6 +19,13 @@ public function coach()
     return $this->belongsTo(Coach::class, 'coach_id');
 }
 
+public function students()
+    {
+        return $this->belongsToMany(
+            Student::class, 'z_enrollments', 'course_id', 'student_id'
+        );
+    }
+
 public function lessons()
 {
     return $this->hasMany(Lesson::class, 'course_id');

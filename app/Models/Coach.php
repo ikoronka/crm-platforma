@@ -17,4 +17,13 @@ class Coach extends Authenticatable
                            'oauth_provider','profile_picture'];
 
     protected $hidden   = ['password','remember_token'];
+
+    public function courses()
+    {
+        return $this->hasMany(
+            Course::class,    // App\Models\Course
+            'coach_id',       // sloupec v z_courses
+            'id'              // primární klíč v z_coaches
+        );
+    }
 }

@@ -2,46 +2,41 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <title>@yield('title','Moje Appka')</title>
-
-    {{-- Vite CSS/JS --}}
+    <title>@yield('title', 'Moje Appka')</title>
     @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gray-50">
 
-    {{-- NAVBAR --}}
-    @include('partials.navbar')
-
-    {{-- FLASH BANNERS ------------------------------------------------ --}}
+    {{-- FLASH BANNERY --}}
     @if (session('success'))
-        <div class="alert alert-success fixed top-4 inset-x-4 md:inset-x-1/3 z-50 shadow-lg">
+        <div id="flash-banner" class="alert alert-success shadow-lg fixed top-4 inset-x-4 md:inset-x-1/3 z-50">
             <span>{{ session('success') }}</span>
         </div>
     @endif
 
     @if (session('error'))
-        <div class="alert alert-error fixed top-4 inset-x-4 md:inset-x-1/3 z-50 shadow-lg">
+        <div id="flash-banner" class="alert alert-error shadow-lg fixed top-4 inset-x-4 md:inset-x-1/3 z-50">
             <span>{{ session('error') }}</span>
         </div>
     @endif
 
-    {{-- banner pro první validační chybu --}}
-    @if ($errors->any())
-        <div class="alert alert-error fixed top-4 inset-x-4 md:inset-x-1/3 z-50 shadow-lg">
-            <span>{{ $errors->first() }}</span>
-        </div>
-    @endif
+    {{-- ZDE INCLUDUJEME NAVBAR Z partials/navbar.blade.php --}}
+    @include('partials.navbar')
 
-
-    {{-- OBSAH STRÁNKY --}}
-    <main class="min-h-screen">
+    {{-- HLAVNÍ OBLAST (z jiných layoutů dědí obsah) --}}
+    <div class="pt-4"> {{-- lehký odsazení pod navbar --}}
         @yield('content')
-    </main>
+    </div>
 
-    {{-- FOOTER (volitelně) --}}
-    @include('partials.footer')
-
-    {{-- Dodatečné skripty --}}
-    @stack('scripts')
+    {{-- Skript pro automatické odstranění flash-banneru po 3 sekundách --}}
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const banner = document.getElementById('flash-banner');
+            if (!banner) return;
+            setTimeout(() => {
+                banner.remove();
+            }, 3000);
+        });
+    </script>
 </body>
 </html>

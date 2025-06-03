@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Student;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -70,5 +71,26 @@ class StudentAuthController extends Controller
                ->with('error', 'Neplatné přihlašovací údaje.');
     }
 
-    /* logout a další metody beze změn ... */
+    /* ============ LOGOUT ============ */
+    public function logout(Request $request)
+    {
+        // 1) odhlášení guardu
+        Auth::guard('student')->logout();
+
+        // 2) zneplatnit session (ochrana proti fixaci)
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        // 3) přesměrovat domů s bannerem
+        return redirect('/')
+               ->with('success', 'Byl(a) jsi úspěšně odhlášen(a).');
+    }
+
+    public function dashboard()
+{
+    $courses = auth('student')->user()?->courses()->get() ?? collect();
+
+    return view('student.dashboard', compact('courses'));
+}
+
 }

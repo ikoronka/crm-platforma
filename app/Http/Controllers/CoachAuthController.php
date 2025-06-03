@@ -2,64 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Coach;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Password;
 
 class CoachAuthController extends Controller
 {
-    /* ============ REGISTRACE ============ */
-    public function register(Request $request)
-    {
-        $data = $request->validate([
-            'name'     => ['required','string','max:255'],
-            'email'    => ['required','email',
-                           Rule::unique((new Coach)->getTable())],
-            'password' => ['required','confirmed',
-                           Password::min(8)->letters()->numbers()],
-        ]);
-
-        $coach = Coach::create([
-            'name'     => $data['name'],
-            'email'    => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-
-        Auth::guard('coach')->login($coach);
-
-        /* <-- ZELENÝ banner po úspěchu */
-        return redirect()
-               ->route('coach.dashboard')
-               ->with('success', 'Vítej! Tvůj účet byl úspěšně vytvořen.');
-    }
-
-    /* ============ LOGIN ============ */
+    /** Zpracuje POST /coach/login */
     public function login(Request $request)
     {
-        $cred = $request->validate([
+        $data = $request->validate([
             'email'    => ['required','email'],
             'password' => ['required'],
         ]);
 
-        if (Auth::guard('coach')->attempt($cred, $request->boolean('remember'))) {
-
+        if (Auth::guard('coach')->attempt($data, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
-            /* <-- ZELENÝ banner po úspěšném přihlášení */
             return redirect()
-                   ->intended('/coach/dashboard')
-                   ->with('success', 'Přihlášení proběhlo v pořádku.');
+                ->intended('/coach/dashboard')
+                ->with('success', 'Kouč je přihlášen.');
         }
 
-        /* <-- ČERVENÝ banner při neplatných údajích */
         return back()
-               ->withInput()
-               ->with('error', 'Neplatné přihlašovací údaje.');
+            ->withInput()
+            ->with('error', 'Neplatné přihlašovací údaje pro kouče.');
     }
 
-    /* logout a další metody beze změn ... */
+    /** Zpracuje POST /coach/logout */
+    public function logout(Request $request)
+    {
+        Auth::guard('coach')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/')
+            ->with('success', 'Byl jsi odhlášen jako kouč.');
+    }
+
+    /** Zobrazí view coach.dashboard */
+    public function dashboard()
+    {
+        return view('coach.dashboard');
+    }
 }

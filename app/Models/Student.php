@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use App\Models\Course;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Student extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
-    /** ↴ EXISTUJÍCÍ tabulka v dumpu */
+    /** ← přidej toto */
     protected $table = 'z_students';
 
     protected $fillable = [
@@ -18,8 +20,17 @@ class Student extends Authenticatable
         'email',
         'birth_year',
         'password',
-        'profile_picture'
+        'profile_picture',
     ];
 
-    protected $hidden   = ['password','remember_token'];
+    /** Kurzy, do kterých je student přihlášen */
+    public function courses(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Course::class,     // cílový model
+            'z_enrollments',     // pivot tabulka
+            'student_id',      // FK na z_students
+            'course_id'        // FK na courses
+        )->withTimestamps();
+    }
 }
