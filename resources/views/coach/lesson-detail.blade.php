@@ -112,9 +112,11 @@
 
         {{-- Tlačítko pro úpravu lekce (případně přidání/úpravu homework) --}}
         <section>
-            <a href="{{ route('coach.lessons.edit', $lesson) }}" class="btn btn-primary">
-                Edit Lesson
-            </a>
+            @if(Route::has('coach.lessons.edit'))
+                <a href="{{ route('coach.lessons.edit', $lesson) }}" class="btn btn-primary">
+                    Edit Lesson
+                </a>
+            @endif
         </section>
 
     </div>

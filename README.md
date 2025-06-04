@@ -69,6 +69,10 @@ GOOGLE_REDIRECT_URI="${APP_URL}/student/login/google/callback"
 The value of `GOOGLE_REDIRECT_URI` must also be registered in the Google Cloud console under **Authorized redirect URIs**. For production deployments, replace `APP_URL` with your application's URL, for example:
 `https://crm-platforma-production.up.railway.app/student/login/google/callback`.
 
+### Missing routes?
+
+The UI now hides Google and lesson edit links when their routes are unavailable. If you don't see these links, ensure the routes are registered.
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
