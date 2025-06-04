@@ -18,10 +18,10 @@ Route::prefix('coach')->name('coach.')->group(function () {
     // === Authentication (login/logout) ===
     Route::view('login', 'coach.auth.login')->name('login.show');
     Route::post('login', [CoachAuthController::class, 'login'])->name('login');
-    Route::post('logout', [CoachAuthController::class, 'logout'])->name('logout');
 
     // === Ochranná zóna pro přihlášené kouče ===
     Route::middleware('auth:coach')->group(function () {
+        Route::post('logout', [CoachAuthController::class, 'logout'])->name('logout');
          // --- Dashboard (seznam kurzů, které kouč vyučuje) ---
         Route::get('dashboard', [CoachCourseController::class, 'index'])
             ->name('dashboard');
@@ -40,9 +40,6 @@ Route::prefix('coach')->name('coach.')->group(function () {
         Route::get('open-courses', [CoachCourseController::class, 'openCourses'])
              ->name('open');
 
-        // Detail lekce
-         Route::get('lessons/{lesson}', [CoachLessonController::class, 'show'])
-              ->name('lessons.show');
 
         // Edit course (zobrazení formuláře s hodnotami)
          Route::get('courses/{course}/edit', [CoachCourseController::class, 'edit'])
@@ -56,15 +53,12 @@ Route::prefix('coach')->name('coach.')->group(function () {
          Route::delete('courses/{course}', [CoachCourseController::class, 'destroy'])
               ->name('courses.destroy');
 
-         // Lesson management
-         Route::get('lessons/{lesson}/edit', [CoachLessonController::class, 'edit'])
-              ->name('lessons.edit');
-         Route::put('lessons/{lesson}', [CoachLessonController::class, 'update'])
-              ->name('lessons.update');
-         Route::delete('lessons/{lesson}', [CoachLessonController::class, 'destroy'])
-              ->name('lessons.destroy');
-         Route::put('submissions/{submission}/grade', [CoachLessonController::class, 'gradeSubmission'])
-              ->name('submissions.grade');
+        // Lesson management
+        Route::resource('lessons', CoachLessonController::class)->only([
+            'show', 'edit', 'update', 'destroy'
+        ]);
+        Route::put('submissions/{submission}/grade', [CoachLessonController::class, 'gradeSubmission'])
+             ->name('submissions.grade');
 
 
         // Profile settings
