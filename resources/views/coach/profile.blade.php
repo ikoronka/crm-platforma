@@ -11,6 +11,10 @@
         @csrf
         @method('PUT')
 
+        {{-- Profile picture preview --}}
+        <img src="{{ $coach->profile_picture }}" alt="Profile picture"
+             class="w-32 h-32 rounded-full object-cover mx-auto">
+
         {{-- Name --}}
         <label class="form-control">
             <span class="label-text">Name</span>
