@@ -3,48 +3,40 @@
 @section('title', 'Welcome')
 
 @section('content')
-<section class="min-h-screen flex flex-col lg:flex-row items-center justify-center lg:justify-between px-6 lg:px-16">
+<section class="container py-5 d-flex flex-column flex-lg-row align-items-center justify-content-between">
     {{-- LEVÁ STRANA – text --}}
-    <div class="max-w-lg space-y-6 lg:mr-12 text-center lg:text-left">
-        <h1 class="text-5xl font-bold">Welcome</h1>
-        <p class="text-lg opacity-80">
+    <div class="me-lg-5 text-center text-lg-start mb-4 mb-lg-0" style="max-width: 500px;">
+        <h1 class="display-5">Welcome</h1>
+        <p class="lead">
             Manage courses, lessons &amp; homework in one simple place.
         </p>
 
-        <div class="space-x-2">
-            <a href="{{ route('student.register.show') }}" class="btn btn-primary">Začít zdarma</a>
-            <a href=""    class="btn btn-outline">Přihlásit se</a>
+        <div class="mt-3">
+            <a href="{{ route('student.register.show') }}" class="btn btn-primary me-2">Začít zdarma</a>
+            <a href="" class="btn btn-outline-secondary">Přihlásit se</a>
         </div>
     </div>
 
     {{-- PRAVÁ STRANA – carousel --}}
-    <div class="w-full lg:w-[600px] xl:w-[720px] mt-10 lg:mt-0">
-        <div id="landingCarousel" class="carousel rounded-box w-full scroll-smooth">
-            @for ($i = 1; $i <= 3; $i++)
-                <div id="slide{{ $i }}" class="carousel-item relative w-full landing-slide">
-                    <img src="{{ asset("images/landing-$i.jpg") }}"
-                         class="w-full h-64 md:h-80 xl:h-[480px] object-cover" />
-                    <a href="#slide{{ $i === 1 ? 3 : $i - 1 }}"
-                       class="btn btn-circle btn-xs absolute left-2 top-1/2 -translate-y-1/2">❮</a>
-                    <a href="#slide{{ $i === 3 ? 1 : $i + 1 }}"
-                       class="btn btn-circle btn-xs absolute right-2 top-1/2 -translate-y-1/2">❯</a>
-                </div>
-            @endfor
+    <div class="w-100" style="max-width: 720px;">
+        <div id="landingCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @for ($i = 1; $i <= 3; $i++)
+                    <div class="carousel-item {{ $i === 1 ? 'active' : '' }}">
+                        <img src="{{ asset("images/landing-$i.jpg") }}" class="d-block w-100" alt="slide {{ $i }}" style="height: 360px; object-fit: cover;">
+                    </div>
+                @endfor
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#landingCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#landingCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </div>
 </section>
 
-{{-- Auto-scroll script --}}
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const slides  = document.querySelectorAll('.landing-slide');
-    let index = 0;
-    setInterval(() => {
-        index = (index + 1) % slides.length;
-        slides[index].scrollIntoView({behavior: 'smooth', inline: 'start', block: 'nearest'});
-    }, 5000);             // 5 s interval
-});
-</script>
-@endpush
 @endsection

@@ -3,48 +3,49 @@
 
 @section('content')
     {{-- Hlavní nadpis --}}
-    <h1 class="text-3xl font-bold text-white mb-8">{{ $course->name }}</h1>
+    <h1 class="h3 mb-4">{{ $course->name }}</h1>
 
-    <div class="space-y-6">
+    <div class="vstack gap-4">
         {{-- Panel s daty kurzu --}}
-        <div class="bg-base-100 p-6 rounded-lg shadow-md">
+        <div class="card p-4">
             {{-- Další termín, Stav registrace, Datum startu a konce --}}
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                <div class="flex items-center mb-2 md:mb-0">
+            <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-3">
+                <div class="d-flex align-items-center mb-2 mb-md-0">
                     @if($nextSession)
-                        <span class="badge badge-info mr-4">
+                        <span class="badge bg-info me-3">
                             Další termín: <strong>{{ $nextSession }}</strong>
                         </span>
                     @endif
 
                     @if($registrationOpen)
-                        <span class="badge badge-success">Registrace otevřená</span>
+                        <span class="badge bg-success">Registrace otevřená</span>
                     @else
-                        <span class="badge badge-error">Registrace uzavřená</span>
+                        <span class="badge bg-danger">Registrace uzavřená</span>
                     @endif
                 </div>
 
-                <div class="text-gray-600">
+                <div class="text-muted">
                     Začátek / konec: <strong>{{ $startDate }} &ndash; {{ $endDate }}</strong>
                 </div>
             </div>
 
             {{-- Popis kurzu --}}
-            <div class="prose max-w-none text-gray-800">
+            <div>
                 {!! nl2br(e($course->description)) !!}
             </div>
         </div>
 
         {{-- Seznam studentů --}}
-        <div class="bg-base-100 p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-semibold mb-4">Studenti přihlášení do kurzu</h2>
+        <div class="card p-4">
+            <h2 class="h5 mb-3">Studenti přihlášení do kurzu</h2>
 
             @if($course->students->isEmpty())
-                <div class="text-gray-500">Žádní studenti zatím přihlášeni.</div>
+                <div class="text-muted">Žádní studenti zatím přihlášeni.</div>
             @else
-                <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <ul class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 list-unstyled">
                     @foreach($course->students as $student)
-                        <li class="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg hover:shadow">
+                        <li class="col">
+                            <div class="border rounded p-3 h-100 d-flex align-items-center gap-2">
                             {{-- Kolečko–ikona místo radio (můžeš to upravit podle potřeby) --}}
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  class="h-5 w-5 text-gray-500"
@@ -53,7 +54,8 @@
                                 <circle cx="12" cy="12" r="10" stroke-width="2"></circle>
                                 <circle cx="12" cy="12" r="5" fill="currentColor"></circle>
                             </svg>
-                            <span class="font-medium text-gray-700">{{ $student->name }}</span>
+                                <span class="fw-medium">{{ $student->name }}</span>
+                            </div>
                         </li>
                     @endforeach
                 </ul>
@@ -61,18 +63,16 @@
         </div>
 
         {{-- Akční tlačítka --}}
-        <div class="flex flex-wrap gap-4">
+        <div class="d-flex flex-wrap gap-2">
             {{-- Spravovat studenty --}}
-            <a href="{{ route('courses.students.manage', $course->id) }}"
-               class="btn btn-outline btn-sm">
+            <a href="{{ route('courses.students.manage', $course->id) }}" class="btn btn-outline-secondary btn-sm">
                 Spravovat studenty
             </a>
 
             {{-- Otevřít/Uzavřít registraci --}}
             <form action="{{ route('courses.toggleRegistration', $course->id) }}" method="POST" class="inline-block">
                 @csrf
-                <button type="submit"
-                        class="btn btn-sm {{ $registrationOpen ? 'btn-warning' : 'btn-success' }}">
+                <button type="submit" class="btn btn-sm {{ $registrationOpen ? 'btn-warning' : 'btn-success' }}">
                     {{ $registrationOpen ? 'Uzavřít registraci' : 'Otevřít registraci' }}
                 </button>
             </form>
@@ -87,19 +87,18 @@
                   onsubmit="return confirm('Opravdu chcete smazat tento kurz?');" class="inline-block">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-sm btn-error">
+                <button type="submit" class="btn btn-sm btn-danger">
                     Smazat kurz
                 </button>
             </form>
 
             {{-- Přidat domácí úkol --}}
-            <a href="{{ route('homeworks.create', ['course' => $course->id]) }}"
-               class="btn btn-sm btn-info">
+            <a href="{{ route('homeworks.create', ['course' => $course->id]) }}" class="btn btn-sm btn-info">
                 Přidat domácí úkol
             </a>
 
             {{-- Otevřít seznam lekcí --}}
-            <a href="{{ route('courses.lessons.index', $course->id) }}" class="btn btn-sm btn-neutral">
+            <a href="{{ route('courses.lessons.index', $course->id) }}" class="btn btn-sm btn-secondary">
                 Otevřít seznam lekcí
             </a>
         </div>

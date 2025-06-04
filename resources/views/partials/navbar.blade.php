@@ -1,12 +1,8 @@
-<nav class="navbar bg-base-100 shadow-md px-4">
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+    <div class="container-fluid">
+        <a href="{{ url('/') }}" class="navbar-brand">logo</a>
 
-    {{-- LOGO --}}
-    <div class="navbar-start">
-        <a href="{{ url('/') }}" class="btn btn-ghost text-xl normal-case text-white">logo</a>
-    </div>
-
-    {{-- PRAVÁ STRANA --}}
-    <div class="navbar-end flex items-center space-x-2">
+        <div class="ms-auto d-flex align-items-center gap-2">
 
         {{-- === STUDENT SECTION === --}}
         @auth('student')
@@ -17,13 +13,13 @@
             {{-- Logout Student --}}
             <form method="POST" action="{{ route('student.logout') }}">
                 @csrf
-                <button type="submit" class="btn btn-sm btn-outline btn-error">
+                <button type="submit" class="btn btn-sm btn-outline-danger">
                     Logout Student
                 </button>
             </form>
         @else
             {{-- Pokud student není přihlášen, zobraz login --}}
-            <a href="{{ route('student.login.show') }}" class="btn btn-sm btn-outline">
+            <a href="{{ route('student.login.show') }}" class="btn btn-sm btn-outline-primary">
                 Login as Student
             </a>
         @endauth
@@ -38,7 +34,7 @@
             {{-- Logout Coach --}}
             <form method="POST" action="{{ route('coach.logout') }}">
                 @csrf
-                <button type="submit" class="btn btn-sm btn-outline btn-error">
+                <button type="submit" class="btn btn-sm btn-outline-danger">
                     Logout Coach
                 </button>
             </form>
@@ -49,5 +45,6 @@
             </a>
         @endauth
 
+        </div>
     </div>
 </nav>

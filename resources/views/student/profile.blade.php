@@ -4,74 +4,71 @@
 @section('title', 'Profile Settings')
 
 @section('student-content')
-    <h1 class="text-3xl font-bold mb-8">Profile Settings</h1>
+    <h1 class="h3 mb-4">Profile Settings</h1>
 
     {{-- FLASH bannery už máš v layouts.app (success / error) --}}
 
-    <form method="POST" action="{{ route('student.profile.update') }}" class="space-y-6 max-w-lg text-white">
+    <form method="POST" action="{{ route('student.profile.update') }}" class="mb-4" style="max-width: 600px;">
         @csrf
         @method('PUT')
 
         {{-- Profile picture preview --}}
-        <img src="{{ $student->profile_picture }}" alt="Profile picture"
-             class="w-32 h-32 rounded-full object-cover mx-auto">
+        <div class="text-center mb-3">
+            <img src="{{ $student->profile_picture }}" alt="Profile picture" class="rounded-circle" width="128" height="128">
+        </div>
 
         {{-- Name --}}
-        <label class="form-control">
-            <span class="label-text">Name</span>
-            <input name="name" type="text" value="{{ old('name', $student->name) }}"
-                   class="input input-bordered w-full" required>
-            @error('name') <span class="text-error text-sm">{{ $message }}</span> @enderror
-        </label>
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input name="name" type="text" value="{{ old('name', $student->name) }}" class="form-control" required>
+            @error('name') <div class="text-danger small">{{ $message }}</div> @enderror
+        </div>
 
         {{-- Email --}}
-        <label class="form-control">
-            <span class="label-text">E-mail</span>
-            <input name="email" type="email" value="{{ old('email', $student->email) }}"
-                   class="input input-bordered w-full" required>
-            @error('email') <span class="text-error text-sm">{{ $message }}</span> @enderror
-        </label>
+        <div class="mb-3">
+            <label class="form-label">E-mail</label>
+            <input name="email" type="email" value="{{ old('email', $student->email) }}" class="form-control" required>
+            @error('email') <div class="text-danger small">{{ $message }}</div> @enderror
+        </div>
 
         {{-- Birth year --}}
-        <label class="form-control">
-            <span class="label-text">Birth year</span>
-            <input name="birth_year" type="number" min="1900" max="{{ date('Y') }}"
-                   value="{{ old('birth_year', $student->birth_year) }}"
-                   class="input input-bordered w-full" required>
-            @error('birth_year') <span class="text-error text-sm">{{ $message }}</span> @enderror
-        </label>
+        <div class="mb-3">
+            <label class="form-label">Birth year</label>
+            <input name="birth_year" type="number" min="1900" max="{{ date('Y') }}" value="{{ old('birth_year', $student->birth_year) }}" class="form-control" required>
+            @error('birth_year') <div class="text-danger small">{{ $message }}</div> @enderror
+        </div>
 
         {{-- Profile picture URL --}}
-        <label class="form-control">
-            <span class="label-text">Profile picture URL</span>
-            <input name="profile_picture" type="url" value="{{ old('profile_picture', $student->profile_picture) }}"
-                   class="input input-bordered w-full">
-            @error('profile_picture') <span class="text-error text-sm">{{ $message }}</span> @enderror
-        </label>
+        <div class="mb-3">
+            <label class="form-label">Profile picture URL</label>
+            <input name="profile_picture" type="url" value="{{ old('profile_picture', $student->profile_picture) }}" class="form-control">
+            @error('profile_picture') <div class="text-danger small">{{ $message }}</div> @enderror
+        </div>
 
-        <details class="collapse collapse-arrow bg-base-200">
-            <summary class="collapse-title text-md font-medium">
-                Change password
-            </summary>
-            <div class="collapse-content space-y-4">
-
-                <label class="form-control">
-                    <span class="label-text">New password</span>
-                    <input name="password" type="password"
-                           class="input input-bordered w-full text-gray-900">
-                </label>
-
-                <label class="form-control">
-                    <span class="label-text">Confirm password</span>
-                    <input name="password_confirmation" type="password"
-                           class="input input-bordered w-full text-gray-900">
-                </label>
-
-                @error('password')
-                    <span class="text-error text-sm">{{ $message }}</span>
-                @enderror
+        <div class="accordion mb-3" id="pwdAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingPwd">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePwd" aria-expanded="false" aria-controls="collapsePwd">
+                        Change password
+                    </button>
+                </h2>
+                <div id="collapsePwd" class="accordion-collapse collapse" aria-labelledby="headingPwd" data-bs-parent="#pwdAccordion">
+                    <div class="accordion-body">
+                        <div class="mb-3">
+                            <label class="form-label">New password</label>
+                            <input name="password" type="password" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Confirm password</label>
+                            <input name="password_confirmation" type="password" class="form-control">
+                        </div>
+                        @error('password')
+                            <div class="text-danger small">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
             </div>
-        </details>
+        </div>
 
         <button class="btn btn-primary">Save changes</button>
     </form>
@@ -80,7 +77,7 @@
         <form method="POST" action="{{ route('student.profile.destroy') }}" class="mt-8">
             @csrf
             @method('DELETE')
-            <button class="btn btn-error" onclick="return confirm('Are you sure you want to delete your account?');">Delete account</button>
+            <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete your account?');">Delete account</button>
         </form>
     @endif
 @endsection

@@ -5,62 +5,61 @@
 @section('title', 'Lesson Detail')
 
 @section('coach-content')
-    <div class="space-y-8">
+    <div class="vstack gap-4">
 
         {{-- Hlavička: Název lekce + tlačítko „Back“ --}}
-        <div class="flex justify-between items-center">
+        <div class="d-flex justify-content-between align-items-center">
             <div>
-                <h1 class="text-4xl font-bold">{{ $lesson->title }}</h1>
+                <h1 class="h3 mb-0">{{ $lesson->title }}</h1>
                 @if($lesson->scheduled_at)
-                    <p class="text-sm opacity-60">Scheduled: {{ $lesson->scheduled_at->format('j.n.Y H:i') }}</p>
+                    <p class="text-muted small">Scheduled: {{ $lesson->scheduled_at->format('j.n.Y H:i') }}</p>
                 @endif
             </div>
-            <a href="{{ route('coach.courses.manage', $lesson->course) }}"
-               class="btn btn-sm btn-outline">
+            <a href="{{ route('coach.courses.manage', $lesson->course) }}" class="btn btn-sm btn-outline-secondary">
                 ← Back to Course
             </a>
         </div>
 
         {{-- Popis lekce --}}
-        <section class="bg-base-100 p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-semibold mb-2">Lesson Description</h2>
+        <section class="card p-4">
+            <h2 class="h5 mb-2">Lesson Description</h2>
             @if(trim($lesson->description))
-                <p class="text-sm leading-relaxed whitespace-pre-line">
+                <p class="mb-0">
                     {{ $lesson->description }}
                 </p>
             @else
-                <p class="text-sm opacity-60 text-white">No description provided for this lesson.</p>
+                <p class="text-muted">No description provided for this lesson.</p>
             @endif
         </section>
 
         {{-- Zadání domácího úkolu --}}
         @if($lesson->homework)
-            <section class="bg-base-100 p-6 rounded-lg shadow-md">
-                <h2 class="text-2xl font-semibold mb-2 text-white">Homework Assignment</h2>
-                <p class="text-sm leading-relaxed text-white whitespace-pre-line">
+            <section class="card p-4">
+                <h2 class="h5 mb-2">Homework Assignment</h2>
+                <p class="mb-0">
                     {{ $lesson->homework->instructions }}
                 </p>
                 @if($lesson->homework->due_date)
-                    <p class="text-sm opacity-60 text-white mt-1">
+                    <p class="text-muted small mt-1">
                         Due date: {{ $lesson->homework->due_date->format('j.n.Y') }}
                     </p>
                 @endif
             </section>
         @else
-            <section class="bg-base-100 p-6 rounded-lg shadow-md">
-                <p class="text-sm opacity-60 text-white">No homework assigned for this lesson.</p>
+            <section class="card p-4">
+                <p class="text-muted">No homework assigned for this lesson.</p>
             </section>
         @endif
 
         {{-- Seznam odevzdaných úkolů studentů --}}
         <section>
-            <h2 class="text-2xl font-semibold mb-4">Student Submissions</h2>
+            <h2 class="h5 mb-3">Student Submissions</h2>
 
             @if($lesson->submissions->isEmpty())
-                <p class="text-sm opacity-60 text-white">No submissions yet.</p>
+                <p class="text-muted">No submissions yet.</p>
             @else
-                <div class="overflow-x-auto bg-base-100 rounded-lg shadow-md">
-                    <table class="table w-full text-white">
+                <div class="table-responsive">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -75,7 +74,7 @@
                                 <tr>
                                     <th>{{ $index + 1 }}</th>
                                     <td>{{ $submission->student->name }}</td>
-                                    <td class="text-xs opacity-60">
+                                    <td class="text-muted small">
                                         {{ $submission->created_at 
                                             ? $submission->created_at->format('j.n.Y H:i') 
                                             : '–' 
@@ -84,23 +83,23 @@
 
                                     <td>
                                         @if($submission->file_path)
-                                            <a href="{{ asset('storage/' . $submission->file_path) }}" class="link link-primary" target="_blank">
+                                            <a href="{{ asset('storage/' . $submission->file_path) }}" class="link-primary" target="_blank">
                                                 Download
                                             </a>
                                         @else
-                                            <span class="opacity-60">No file</span>
+                                            <span class="text-muted">No file</span>
                                         @endif
                                     </td>
                                     <td>
-                                        <form method="POST" action="{{ route('coach.submissions.grade', $submission) }}" class="flex items-center">
+                                        <form method="POST" action="{{ route('coach.submissions.grade', $submission) }}" class="d-flex align-items-center">
                                             @csrf
                                             @method('PUT')
-                                            <select name="grade" class="select select-sm select-bordered">
+                                            <select name="grade" class="form-select form-select-sm">
                                                 @for($i = 1; $i <= 5; $i++)
                                                     <option value="{{ $i }}" {{ $submission->grade == $i ? 'selected' : '' }}>{{ $i }}★</option>
                                                 @endfor
                                             </select>
-                                            <button type="submit" class="btn btn-sm ml-2">Save</button>
+                                            <button type="submit" class="btn btn-sm ms-2 btn-primary">Save</button>
                                         </form>
                                     </td>
                                 </tr>

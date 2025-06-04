@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="flex min-h-screen">
+<div class="d-flex min-vh-100">
 
     {{-- SIDEBAR --}}
-    <aside class="w-56 shrink-0 bg-base-200 border-r text-white">
+    <aside class="border-end" style="width: 14rem;">
         {{-- $sidebarActive předá každá stránka --}}
         @include('partials.sidebar', ['active' => $sidebarActive ?? ''])
     </aside>
 
     {{-- HLAVNÍ OBLAST --}}
-    <section class="flex-1 p-10 space-y-6">
+    <section class="flex-grow-1 p-4">
         @yield('student-content')
     </section>
 
