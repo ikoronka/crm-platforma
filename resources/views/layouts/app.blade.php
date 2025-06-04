@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>@yield('title', 'Moje Appka')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ENjdO4Dr2bkBIFxQpeoA6DQD02K4eAt+Uaz2bR0I3zE+nqU9cE+M9KfG5D1pb1d" crossorigin="anonymous">
-    @vite(['resources/js/app.js'])
+    {{-- Bootstrap CDN only, no build step needed --}}
 </head>
 <body>
 
@@ -30,14 +30,17 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-q/QDYob/oKhY7HF8S9BDrGFhkaN/hfbc8w3k2G6pJUp5I1cDIeEJDfBqXc9E+IOk" crossorigin="anonymous"></script>
-    {{-- Skript pro automatické odstranění flash-banneru po 3 sekundách --}}
+    {{-- Skript pro flash banner a inicializaci carouselu --}}
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             const banner = document.getElementById('flash-banner');
-            if (!banner) return;
-            setTimeout(() => {
-                banner.remove();
-            }, 3000);
+            if (banner) {
+                setTimeout(() => banner.remove(), 3000);
+            }
+
+            document.querySelectorAll('.carousel').forEach(el => {
+                new bootstrap.Carousel(el);
+            });
         });
     </script>
 </body>
