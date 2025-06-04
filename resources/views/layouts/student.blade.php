@@ -4,7 +4,7 @@
 <div class="d-flex min-vh-100">
 
     {{-- SIDEBAR --}}
-    <aside class="border-end" style="width: 14rem;">
+    <aside class="bg-light border-end" style="width: 14rem;">
         {{-- $sidebarActive předá každá stránka --}}
         @include('partials.sidebar', ['active' => $sidebarActive ?? ''])
     </aside>

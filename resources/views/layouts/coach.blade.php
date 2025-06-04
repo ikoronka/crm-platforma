@@ -5,7 +5,7 @@
 <div class="d-flex min-vh-100">
 
     {{-- LEVÝ SLUPEC – sidebar‐coach --}}
-    <aside class="border-end" style="width: 14rem;">
+    <aside class="bg-light border-end" style="width: 14rem;">
         @include('partials.sidebar-coach', ['active' => $sidebarActive ?? 'dashboard'])
     </aside>
 
