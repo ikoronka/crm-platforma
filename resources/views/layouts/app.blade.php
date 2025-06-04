@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('title', 'Moje Appka')</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ENjdO4Dr2bkBIFxQpeoA6DQD02K4eAt+Uaz2bR0I3zE+nqU9cE+M9KfG5D1pb1d" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     {{-- Bootstrap CDN only, no build step needed --}}
 </head>
 <body>
@@ -29,7 +29,7 @@
         @yield('content')
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-q/QDYob/oKhY7HF8S9BDrGFhkaN/hfbc8w3k2G6pJUp5I1cDIeEJDfBqXc9E+IOk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     {{-- Skript pro flash banner a inicializaci carouselu --}}
     <script>
         window.addEventListener('DOMContentLoaded', () => {
