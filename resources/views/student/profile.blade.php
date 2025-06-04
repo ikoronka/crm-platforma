@@ -12,6 +12,10 @@
         @csrf
         @method('PUT')
 
+        {{-- Profile picture preview --}}
+        <img src="{{ $student->profile_picture }}" alt="Profile picture"
+             class="w-32 h-32 rounded-full object-cover mx-auto">
+
         {{-- Name --}}
         <label class="form-control">
             <span class="label-text">Name</span>
@@ -35,6 +39,14 @@
                    value="{{ old('birth_year', $student->birth_year) }}"
                    class="input input-bordered w-full" required>
             @error('birth_year') <span class="text-error text-sm">{{ $message }}</span> @enderror
+        </label>
+
+        {{-- Profile picture URL --}}
+        <label class="form-control">
+            <span class="label-text">Profile picture URL</span>
+            <input name="profile_picture" type="url" value="{{ old('profile_picture', $student->profile_picture) }}"
+                   class="input input-bordered w-full">
+            @error('profile_picture') <span class="text-error text-sm">{{ $message }}</span> @enderror
         </label>
 
         <details class="collapse collapse-arrow bg-base-200">
@@ -62,5 +74,11 @@
         </details>
 
         <button class="btn btn-primary">Save changes</button>
+    </form>
+
+    <form method="POST" action="{{ route('student.profile.destroy') }}" class="mt-8">
+        @csrf
+        @method('DELETE')
+        <button class="btn btn-error" onclick="return confirm('Are you sure you want to delete your account?');">Delete account</button>
     </form>
 @endsection

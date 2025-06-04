@@ -38,7 +38,8 @@ class StudentAuthController extends Controller
         'email'           => $data['email'],
         'birth_year'      => $data['birth_year'],
         'password'        => Hash::make($data['password']),
-        'profile_picture' => 'student.jpg',
+        // default profile picture
+        'profile_picture' => 'https://www.pngkit.com/png/detail/126-1262807_instagram-default-profile-picture-png.png',
     ]);
 
     // Odeslání uvítacího e-mailu:

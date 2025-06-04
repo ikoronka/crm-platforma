@@ -62,6 +62,7 @@ Route::prefix('coach')->name('coach.')->group(function () {
             ->name('lessons.update');
         Route::delete('lessons/{lesson}', [CoachLessonController::class, 'destroy'])
             ->name('lessons.destroy');
+      
         Route::put('submissions/{submission}/grade', [CoachLessonController::class, 'gradeSubmission'])
              ->name('submissions.grade');
 
@@ -100,5 +101,7 @@ Route::prefix('student')->name('student.')->group(function () {
             ->name('profile');
         Route::put('profile', [StudentProfileController::class, 'update'])
             ->name('profile.update');
+        Route::delete('profile', [StudentProfileController::class, 'destroy'])
+            ->name('profile.destroy');
     });
 });

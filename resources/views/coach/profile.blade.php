@@ -11,6 +11,10 @@
         @csrf
         @method('PUT')
 
+        {{-- Profile picture preview --}}
+        <img src="{{ $coach->profile_picture }}" alt="Profile picture"
+             class="w-32 h-32 rounded-full object-cover mx-auto">
+
         {{-- Name --}}
         <label class="form-control">
             <span class="label-text">Name</span>
@@ -27,6 +31,15 @@
                    value="{{ old('email', $coach->email ?? '') }}"
                    class="text-white input input-bordered w-full text-gray-900" required>
             @error('email') <span class="text-error text-sm">{{ $message }}</span> @enderror
+        </label>
+
+        {{-- Profile picture URL --}}
+        <label class="form-control">
+            <span class="label-text">Profile picture URL</span>
+            <input name="profile_picture" type="url"
+                   value="{{ old('profile_picture', $coach->profile_picture ?? '') }}"
+                   class="text-white input input-bordered w-full text-gray-900">
+            @error('profile_picture') <span class="text-error text-sm">{{ $message }}</span> @enderror
         </label>
 
         {{-- Change password --}}
