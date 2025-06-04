@@ -12,8 +12,8 @@ class DatabaseSeeder extends Seeder
     {
         // Coaches
         DB::table('z_coaches')->insert([
-            ['name' => 'Petr Novák', 'email' => 'petr.novak@example.com', 'oauth_provider' => 'google', 'profile_picture' => 'profile1.jpg'],
-            ['name' => 'Jana Dvořáková', 'email' => 'jana.dvorakova@example.com', 'oauth_provider' => 'google', 'profile_picture' => 'profile2.jpg'],
+            ['name' => 'Petr Novák', 'email' => 'petr.novak@example.com', 'oauth_provider' => 'google', 'profile_picture' => 'https://www.pngkit.com/png/detail/126-1262807_instagram-default-profile-picture-png.png'],
+            ['name' => 'Jana Dvořáková', 'email' => 'jana.dvorakova@example.com', 'oauth_provider' => 'google', 'profile_picture' => 'https://www.pngkit.com/png/detail/126-1262807_instagram-default-profile-picture-png.png'],
         ]);
 
         // Course Templates
@@ -55,9 +55,9 @@ class DatabaseSeeder extends Seeder
 
         // Students
         DB::table('z_students')->insert([
-            ['name' => 'Adam Kučera', 'birth_year' => 2010, 'email' => 'adam.kucera@example.com', 'profile_picture' => 'student1.jpg'],
-            ['name' => 'Lucie Novotná', 'birth_year' => 2011, 'email' => 'lucie.novotna@example.com', 'profile_picture' => 'student2.jpg'],
-            ['name' => 'Tomáš Marek', 'birth_year' => 2009, 'email' => 'tomas.marek@example.com', 'profile_picture' => 'student3.jpg'],
+            ['name' => 'Adam Kučera', 'birth_year' => 2010, 'email' => 'adam.kucera@example.com', 'profile_picture' => 'https://www.pngkit.com/png/detail/126-1262807_instagram-default-profile-picture-png.png'],
+            ['name' => 'Lucie Novotná', 'birth_year' => 2011, 'email' => 'lucie.novotna@example.com', 'profile_picture' => 'https://www.pngkit.com/png/detail/126-1262807_instagram-default-profile-picture-png.png'],
+            ['name' => 'Tomáš Marek', 'birth_year' => 2009, 'email' => 'tomas.marek@example.com', 'profile_picture' => 'https://www.pngkit.com/png/detail/126-1262807_instagram-default-profile-picture-png.png'],
         ]);
 
         // Enrollments

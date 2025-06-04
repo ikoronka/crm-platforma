@@ -26,6 +26,7 @@ class CoachProfileController extends Controller
             'name'     => ['required', 'string', 'max:255'],
             'email'    => ['required', 'email',
                            Rule::unique('z_coaches')->ignore($coach->id)],
+            'profile_picture' => ['nullable', 'url', 'max:255'],
             'password' => ['nullable', 'confirmed',
                            Password::min(8)->letters()->numbers()],
         ]);
@@ -34,6 +35,10 @@ class CoachProfileController extends Controller
             'name'  => $data['name'],
             'email' => $data['email'],
         ]);
+
+        if (!empty($data['profile_picture'])) {
+            $coach->profile_picture = $data['profile_picture'];
+        }
 
         if ($request->filled('password')) {
             $coach->password = Hash::make($data['password']);
