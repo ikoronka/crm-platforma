@@ -38,7 +38,8 @@ class StudentAuthController extends Controller
         'email'           => $data['email'],
         'birth_year'      => $data['birth_year'],
         'password'        => Hash::make($data['password']),
-        'profile_picture' => 'student.jpg',
+        // default profile picture
+        'profile_picture' => 'https://www.pngkit.com/png/detail/126-1262807_instagram-default-profile-picture-png.png',
     ]);
 
     // Odeslání uvítacího e-mailu:
@@ -120,5 +121,21 @@ class StudentAuthController extends Controller
 
     return view('student.dashboard', compact('courses'));
 }
+
+    public function destroy(Request $request)
+    {
+        $student = $request->user('student');
+
+        // Nejprve odhlásit studenty a zneplatnit session
+        Auth::guard('student')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        // Poté smazat záznam v DB
+        $student->delete();
+
+        return redirect('/')
+            ->with('success', 'Tvůj účet byl smazán.');
+    }
 
 }

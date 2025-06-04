@@ -102,5 +102,7 @@ Route::prefix('student')->name('student.')->group(function () {
             ->name('profile');
         Route::put('profile', [StudentProfileController::class, 'update'])
             ->name('profile.update');
+        Route::delete('profile', [StudentProfileController::class, 'destroy'])
+            ->name('profile.destroy');
     });
 });
