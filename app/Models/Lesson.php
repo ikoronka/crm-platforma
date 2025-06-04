@@ -8,6 +8,18 @@ class Lesson extends Model
 {
     protected $table = 'z_lessons'; // nebo jak se jmenuje tabulka
 
+    protected $fillable = [
+        'course_id',
+        'title',
+        'description',
+        'scheduled_at',
+        'order_number',
+    ];
+
+    protected $casts = [
+        'scheduled_at' => 'datetime',
+    ];
+
     // Vztah na kurz
     public function course()
     {

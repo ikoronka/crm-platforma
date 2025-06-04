@@ -44,9 +44,10 @@
                                         Scheduled: {{ $lesson->scheduled_at?->format('j.n.Y') ?? 'TBA' }}
                                     </p>
                                 </div>
-                                <a href="{{ route('coach.lessons.show', $lesson) }}" class="btn btn-sm btn-outline">
-                                    View
-                                </a>
+                                <div class="flex gap-2">
+                                    <a href="{{ route('coach.lessons.show', $lesson) }}" class="btn btn-sm btn-outline">View</a>
+                                    <a href="{{ route('coach.lessons.edit', $lesson) }}" class="btn btn-sm">Edit</a>
+                                </div>
                             </div>
                         </div>
                     @endforeach

@@ -87,5 +87,11 @@
                 <a href="{{ route('coach.courses.manage', $course) }}" class="link text-white">Cancel</a>
             </div>
         </form>
+
+        <form method="POST" action="{{ route('coach.courses.destroy', $course) }}" class="mt-4" onsubmit="return confirm('Delete this course?');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-error">Delete Course</button>
+        </form>
     </div>
 @endsection
