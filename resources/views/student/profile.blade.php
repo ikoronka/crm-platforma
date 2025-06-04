@@ -75,7 +75,7 @@
 
         <button class="btn btn-primary">Save changes</button>
     </form>
-
+    
     @if (Route::has('student.profile.destroy'))
         <form method="POST" action="{{ route('student.profile.destroy') }}" class="mt-8">
             @csrf
