@@ -83,9 +83,9 @@ Route::prefix('student')->name('student.')->group(function () {
         Route::get('register', [StudentAuthController::class,'showRegister'])->name('register.show');
         Route::post('login',    [StudentAuthController::class,'login'])->name('login');
         Route::post('register', [StudentAuthController::class,'register'])->name('register');
-        Route::get('student/login/google', [StudentAuthController::class, 'redirectToGoogle'])
-            ->name('student.login.google');
-        Route::get('student/login/google/callback', [StudentAuthController::class, 'handleGoogleCallback']);
+        Route::get('login/google', [StudentAuthController::class, 'redirectToGoogle'])
+            ->name('login.google');
+        Route::get('login/google/callback', [StudentAuthController::class, 'handleGoogleCallback']);
 
     });
 
