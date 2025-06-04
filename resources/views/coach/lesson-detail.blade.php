@@ -67,6 +67,7 @@
                                 <th>Student Name</th>
                                 <th>Submitted At</th>
                                 <th>File</th>
+                                <th>Grade</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -83,13 +84,24 @@
 
                                     <td>
                                         @if($submission->file_path)
-                                            <a href="{{ asset('storage/' . $submission->file_path) }}"
-                                               class="link link-primary" target="_blank">
+                                            <a href="{{ asset('storage/' . $submission->file_path) }}" class="link link-primary" target="_blank">
                                                 Download
                                             </a>
                                         @else
                                             <span class="opacity-60">No file</span>
                                         @endif
+                                    </td>
+                                    <td>
+                                        <form method="POST" action="{{ route('coach.submissions.grade', $submission) }}" class="flex items-center">
+                                            @csrf
+                                            @method('PUT')
+                                            <select name="grade" class="select select-sm select-bordered">
+                                                @for($i = 1; $i <= 5; $i++)
+                                                    <option value="{{ $i }}" {{ $submission->grade == $i ? 'selected' : '' }}>{{ $i }}★</option>
+                                                @endfor
+                                            </select>
+                                            <button type="submit" class="btn btn-sm ml-2">Save</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -101,8 +113,7 @@
 
         {{-- Tlačítko pro úpravu lekce (případně přidání/úpravu homework) --}}
         <section>
-            <a href=""
-               class="btn btn-primary">
+            <a href="{{ route('coach.lessons.edit', $lesson) }}" class="btn btn-primary">
                 Edit Lesson
             </a>
         </section>
