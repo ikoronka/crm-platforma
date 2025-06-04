@@ -1,20 +1,15 @@
 @php($active = $active ?? '')
-<div class="flex flex-col gap-2 p-4">
-
+<div class="list-group list-group-flush p-3 bg-white rounded shadow-sm">
     <a href="{{ route('student.dashboard') }}"
-       class="btn btn-ghost justify-start w-full font-medium
-              {{ $active === 'dashboard' ? 'btn-active' : '' }}">
-        <i class="lucide-home w-4 h-4 mr-2"></i> My courses
+       class="list-group-item list-group-item-action {{ $active === 'dashboard' ? 'active' : '' }}">
+        My courses
     </a>
-
     <a href="{{ route('student.open') }}"
-       class="btn btn-ghost justify-start w-full font-medium
-              {{ $active === 'open' ? 'btn-active' : '' }}">
-        <i class="lucide-book-open w-4 h-4 mr-2"></i> Open courses
+       class="list-group-item list-group-item-action {{ $active === 'open' ? 'active' : '' }}">
+        Open courses
     </a>
-
     <a href="{{ route('student.profile') }}"
-       class="btn btn-ghost justify-start w-full font-medium">
-        <i class="lucide-user w-4 h-4 mr-2"></i> Profile Settings
+       class="list-group-item list-group-item-action">
+        Profile Settings
     </a>
 </div>

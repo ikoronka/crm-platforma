@@ -3,26 +3,27 @@
 @section('title', 'Student Login')
 
 @section('content')
-<div class="min-h-screen flex items-center justify-center">
-   <form method="POST" action="{{ route('student.login') }}"
-         class="card w-full max-w-sm bg-base-100 shadow-xl p-6 space-y-4">
+<div class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+   <form method="POST" action="{{ route('student.login') }}" class="border rounded p-4 shadow w-100" style="max-width: 400px;">
         @csrf
-        <h2 class="text-2xl font-bold text-center text-white">Student login</h2>
+        <h2 class="h4 text-center mb-3">Student login</h2>
 
-        <input name="email" type="email" placeholder="E-mail"
-               class="input input-bordered w-full text-white" required autofocus>
-        <input name="password" type="password" placeholder="Password"
-               class="input input-bordered w-full text-white" required>
+        <div class="mb-3">
+            <input name="email" type="email" placeholder="E-mail" class="form-control" required autofocus>
+        </div>
+        <div class="mb-3">
+            <input name="password" type="password" placeholder="Password" class="form-control" required>
+        </div>
 
-        <label class="label cursor-pointer justify-start gap-2">
-            <input type="checkbox" name="remember" class="checkbox checkbox-sm">
-            <span class="label-text">Remember me</span>
-        </label>
+        <div class="form-check mb-3">
+            <input type="checkbox" name="remember" class="form-check-input" id="remember">
+            <label class="form-check-label" for="remember">Remember me</label>
+        </div>
 
-        <button class="btn btn-secondary w-full">Log in</button>
+        <button class="btn btn-primary w-100">Log in</button>
 
-        <p class="text-center text-sm opacity-60">
-            Coach? <a href="{{ route('coach.login.show') }}" class="link">Login here</a>
+        <p class="text-center mt-3 small">
+            Coach? <a href="{{ route('coach.login.show') }}">Login here</a>
         </p>
    </form>
 </div>

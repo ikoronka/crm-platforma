@@ -5,41 +5,41 @@
 @section('title', 'Edit Lesson')
 
 @section('coach-content')
-    <div class="max-w-2xl mx-auto p-6 space-y-6">
-        <h1 class="text-3xl font-bold text-white">Edit Lesson: {{ $lesson->title }}</h1>
+    <div class="mx-auto" style="max-width: 720px;">
+        <h1 class="h3 mb-4">Edit Lesson: {{ $lesson->title }}</h1>
 
-        <form method="POST" action="{{ route('coach.lessons.update', $lesson) }}" class="space-y-4 bg-base-100 p-6 rounded-lg shadow-md">
+        <form method="POST" action="{{ route('coach.lessons.update', $lesson) }}" class="border rounded p-4 shadow mb-4">
             @csrf
             @method('PUT')
 
-            <label class="block">
-                <span class="text-white font-medium">Title</span>
-                <input type="text" name="title" value="{{ old('title', $lesson->title) }}" class="input input-bordered w-full mt-1" required>
-                @error('title')<p class="text-red-400 text-sm mt-1">{{ $message }}</p>@enderror
-            </label>
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input type="text" name="title" value="{{ old('title', $lesson->title) }}" class="form-control" required>
+                @error('title')<div class="text-danger small">{{ $message }}</div>@enderror
+            </div>
 
-            <label class="block">
-                <span class="text-white font-medium">Description</span>
-                <textarea name="description" class="textarea textarea-bordered w-full mt-1">{{ old('description', $lesson->description) }}</textarea>
-                @error('description')<p class="text-red-400 text-sm mt-1">{{ $message }}</p>@enderror
-            </label>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea name="description" class="form-control">{{ old('description', $lesson->description) }}</textarea>
+                @error('description')<div class="text-danger small">{{ $message }}</div>@enderror
+            </div>
 
-            <label class="block">
-                <span class="text-white font-medium">Scheduled At</span>
-                <input type="datetime-local" name="scheduled_at" value="{{ old('scheduled_at', $lesson->scheduled_at?->format('Y-m-d\\TH:i')) }}" class="input input-bordered w-full mt-1">
-                @error('scheduled_at')<p class="text-red-400 text-sm mt-1">{{ $message }}</p>@enderror
-            </label>
+            <div class="mb-3">
+                <label class="form-label">Scheduled At</label>
+                <input type="datetime-local" name="scheduled_at" value="{{ old('scheduled_at', $lesson->scheduled_at?->format('Y-m-d\\TH:i')) }}" class="form-control">
+                @error('scheduled_at')<div class="text-danger small">{{ $message }}</div>@enderror
+            </div>
 
-            <div class="mt-6 flex justify-between items-center">
+            <div class="d-flex justify-content-between align-items-center mt-4">
                 <button type="submit" class="btn btn-primary">Save Changes</button>
-                <a href="{{ route('coach.lessons.show', $lesson) }}" class="link text-white">Cancel</a>
+                <a href="{{ route('coach.lessons.show', $lesson) }}">Cancel</a>
             </div>
         </form>
 
-        <form method="POST" action="{{ route('coach.lessons.destroy', $lesson) }}" onsubmit="return confirm('Delete this lesson?');" class="mt-4">
+        <form method="POST" action="{{ route('coach.lessons.destroy', $lesson) }}" onsubmit="return confirm('Delete this lesson?');" class="mt-3">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-error">Delete Lesson</button>
+            <button type="submit" class="btn btn-danger">Delete Lesson</button>
         </form>
     </div>
 @endsection

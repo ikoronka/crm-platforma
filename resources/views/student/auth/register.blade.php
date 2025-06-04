@@ -3,38 +3,41 @@
 @section('title', 'Student Register')
 
 @section('content')
-<div class="min-h-screen flex items-center justify-center">
-   <form method="POST" action="{{ route('student.register') }}"
-         class="card w-full max-w-sm bg-base-100 shadow-xl p-6 space-y-4">
+<div class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+   <form method="POST" action="{{ route('student.register') }}" class="border rounded p-4 shadow w-100" style="max-width: 400px;">
         @csrf
 
-        <h2 class="text-2xl font-bold text-center text-white">Student sign-up</h2>
+        <h2 class="h4 text-center mb-3">Student sign-up</h2>
 
         {{-- Name --}}
-        <input name="name" type="text" placeholder="Full name"
-               class="input input-bordered w-full text-white" required>
+        <div class="mb-3">
+            <input name="name" type="text" placeholder="Full name" class="form-control" required>
+        </div>
 
         {{-- Email --}}
-        <input name="email" type="email" placeholder="E-mail"
-               class="input input-bordered w-full text-white" required>
+        <div class="mb-3">
+            <input name="email" type="email" placeholder="E-mail" class="form-control" required>
+        </div>
        
-        <input name="birth_year" type="number" min="1900" max="{{ date('Y') }}"
-           class="input input-bordered w-full text-white"
-           value="{{ old('birth_year') }}" required>
+        <div class="mb-3">
+            <input name="birth_year" type="number" min="1900" max="{{ date('Y') }}" class="form-control" value="{{ old('birth_year') }}" required>
+        </div>
            
         {{-- Password --}}
-        <input name="password" type="password" placeholder="Password"
-               class="input input-bordered w-full text-white" required>
+        <div class="mb-3">
+            <input name="password" type="password" placeholder="Password" class="form-control" required>
+        </div>
 
         {{-- Confirm password --}}
-        <input name="password_confirmation" type="password" placeholder="Confirm password"
-               class="input input-bordered w-full text-white" required>
+        <div class="mb-3">
+            <input name="password_confirmation" type="password" placeholder="Confirm password" class="form-control" required>
+        </div>
 
-        <button class="btn btn-secondary w-full">Sign up</button>
+        <button class="btn btn-primary w-100">Sign up</button>
 
-        <p class="text-center text-sm opacity-60">
+        <p class="text-center mt-3 small">
             Already have an account?
-            <a href="{{ route('student.login.show') }}" class="link">Log in</a>
+            <a href="{{ route('student.login.show') }}">Log in</a>
         </p>
    </form>
 </div>

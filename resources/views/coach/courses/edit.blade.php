@@ -6,92 +6,68 @@
 @section('title', 'Edit Course')
 
 @section('coach-content')
-    <div class="max-w-2xl mx-auto p-6 space-y-6">
-        <h1 class="text-3xl font-bold text-white">Edit Course: {{ $course->name }}</h1>
+    <div class="mx-auto" style="max-width: 720px;">
+        <h1 class="h3 mb-4">Edit Course: {{ $course->name }}</h1>
 
-        <form action="{{ route('coach.courses.update', $course) }}" 
-              method="POST" 
-              class="space-y-4 bg-base-100 p-6 rounded-lg shadow-md">
+        <form action="{{ route('coach.courses.update', $course) }}" method="POST" class="border rounded p-4 shadow mb-4">
             @csrf
             @method('PUT')
 
             {{-- Název kurzu --}}
-            <label class="block">
-                <span class="text-white font-medium">Course Name</span>
-                <input 
-                    type="text" 
-                    name="name" 
-                    value="{{ old('name', $course->name) }}" 
-                    class="input input-bordered w-full mt-1" 
-                    required>
+            <div class="mb-3">
+                <label class="form-label">Course Name</label>
+                <input type="text" name="name" value="{{ old('name', $course->name) }}" class="form-control" required>
                 @error('name')
-                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
+                    <div class="text-danger small">{{ $message }}</div>
                 @enderror
-            </label>
+            </div>
 
             {{-- Šablona kurzu (template_id) – zatím necháme prázdné, pokud nechceme používat --}}
-            <label class="block">
-                <span class="text-white font-medium">Template ID (optional)</span>
-                <input 
-                    type="number" 
-                    name="template_id" 
-                    value="{{ old('template_id', $course->template_id) }}" 
-                    class="input input-bordered w-full mt-1">
+            <div class="mb-3">
+                <label class="form-label">Template ID (optional)</label>
+                <input type="number" name="template_id" value="{{ old('template_id', $course->template_id) }}" class="form-control">
                 @error('template_id')
-                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
+                    <div class="text-danger small">{{ $message }}</div>
                 @enderror
-            </label>
+            </div>
 
             {{-- Začátek a konec kurzu --}}
-            <div class="grid grid-cols-2 gap-4">
-                <label class="block">
-                    <span class="text-white font-medium">Start Date</span>
-                    <input 
-                        type="date" 
-                        name="start_date" 
-                        value="{{ old('start_date', $course->start_date?->format('Y-m-d')) }}" 
-                        class="input input-bordered w-full mt-1">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Start Date</label>
+                    <input type="date" name="start_date" value="{{ old('start_date', $course->start_date?->format('Y-m-d')) }}" class="form-control">
                     @error('start_date')
-                        <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
+                        <div class="text-danger small">{{ $message }}</div>
                     @enderror
-                </label>
-                <label class="block">
-                    <span class="text-white font-medium">End Date</span>
-                    <input 
-                        type="date" 
-                        name="end_date" 
-                        value="{{ old('end_date', $course->end_date?->format('Y-m-d')) }}" 
-                        class="input input-bordered w-full mt-1">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">End Date</label>
+                    <input type="date" name="end_date" value="{{ old('end_date', $course->end_date?->format('Y-m-d')) }}" class="form-control">
                     @error('end_date')
-                        <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
+                        <div class="text-danger small">{{ $message }}</div>
                     @enderror
-                </label>
+                </div>
             </div>
 
             {{-- Schedule Info --}}
-            <label class="block">
-                <span class="text-white font-medium">Schedule Info (optional)</span>
-                <input 
-                    type="text" 
-                    name="schedule_info" 
-                    value="{{ old('schedule_info', $course->schedule_info) }}" 
-                    placeholder="Např. „Pondělí a středa 15:00–17:00“"
-                    class="input input-bordered w-full mt-1">
+            <div class="mb-3">
+                <label class="form-label">Schedule Info (optional)</label>
+                <input type="text" name="schedule_info" value="{{ old('schedule_info', $course->schedule_info) }}" placeholder="Např. „Pondělí a středa 15:00–17:00“" class="form-control">
                 @error('schedule_info')
-                    <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
+                    <div class="text-danger small">{{ $message }}</div>
                 @enderror
-            </label>
+            </div>
 
-            <div class="mt-6 flex justify-between items-center">
+            <div class="d-flex justify-content-between align-items-center mt-4">
                 <button type="submit" class="btn btn-primary">Save Changes</button>
-                <a href="{{ route('coach.courses.manage', $course) }}" class="link text-white">Cancel</a>
+                <a href="{{ route('coach.courses.manage', $course) }}">Cancel</a>
             </div>
         </form>
 
-        <form method="POST" action="{{ route('coach.courses.destroy', $course) }}" class="mt-4" onsubmit="return confirm('Delete this course?');">
+        <form method="POST" action="{{ route('coach.courses.destroy', $course) }}" class="mt-3" onsubmit="return confirm('Delete this course?');">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-error">Delete Course</button>
+            <button type="submit" class="btn btn-danger">Delete Course</button>
         </form>
     </div>
 @endsection

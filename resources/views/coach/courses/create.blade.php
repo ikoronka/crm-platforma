@@ -5,70 +5,46 @@
 @section('title', 'Create New Course')
 
 @section('coach-content')
-    <div class="max-w-3xl mx-auto space-y-6">
-        <h1 class="text-3xl font-bold text-white">Create Course</h1>
+    <div class="mx-auto" style="max-width: 800px;">
+        <h1 class="h3 mb-4">Create Course</h1>
 
-        <form action="{{ route('coach.courses.store') }}" method="POST" class="space-y-4 bg-base-100 p-6 rounded-lg shadow-lg">
+        <form action="{{ route('coach.courses.store') }}" method="POST" class="border rounded p-4 shadow mb-4">
             @csrf
 
-            <div>
-                <label class="block text-sm font-medium text-white mb-1" for="name">Course Name</label>
-                <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    value="{{ old('name') }}"
-                    class="input input-bordered w-full bg-base-200 text-white"
-                    required
-                >
+            <div class="mb-3">
+                <label class="form-label" for="name">Course Name</label>
+                <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control" required>
                 @error('name')
-                    <p class="text-xs text-error mt-1">{{ $message }}</p>
+                    <div class="text-danger small">{{ $message }}</div>
                 @enderror
             </div>
 
-            <div>
-                <label class="block text-sm font-medium text-white mb-1" for="description">Description</label>
-                <textarea
-                    name="description"
-                    id="description"
-                    rows="4"
-                    class="textarea textarea-bordered w-full bg-base-200 text-white"
-                >{{ old('description') }}</textarea>
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea name="description" id="description" rows="4" class="form-control">{{ old('description') }}</textarea>
                 @error('description')
-                    <p class="text-xs text-error mt-1">{{ $message }}</p>
+                    <div class="text-danger small">{{ $message }}</div>
                 @enderror
             </div>
 
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm font-medium text-white mb-1" for="start_date">Start Date</label>
-                    <input
-                        type="date"
-                        name="start_date"
-                        id="start_date"
-                        value="{{ old('start_date') }}"
-                        class="input input-bordered w-full bg-base-200 text-white"
-                    >
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label" for="start_date">Start Date</label>
+                    <input type="date" name="start_date" id="start_date" value="{{ old('start_date') }}" class="form-control">
                     @error('start_date')
-                        <p class="text-xs text-error mt-1">{{ $message }}</p>
+                        <div class="text-danger small">{{ $message }}</div>
                     @enderror
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-white mb-1" for="end_date">End Date</label>
-                    <input
-                        type="date"
-                        name="end_date"
-                        id="end_date"
-                        value="{{ old('end_date') }}"
-                        class="input input-bordered w-full bg-base-200 text-white"
-                    >
+                <div class="col-md-6">
+                    <label class="form-label" for="end_date">End Date</label>
+                    <input type="date" name="end_date" id="end_date" value="{{ old('end_date') }}" class="form-control">
                     @error('end_date')
-                        <p class="text-xs text-error mt-1">{{ $message }}</p>
+                        <div class="text-danger small">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary w-full">Create course</button>
+            <button type="submit" class="btn btn-primary w-100">Create course</button>
         </form>
     </div>
 @endsection
