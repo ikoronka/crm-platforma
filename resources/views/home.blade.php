@@ -13,7 +13,7 @@
 
         <div class="mt-3">
             <a href="{{ route('student.register.show') }}" class="btn btn-primary me-2">Začít zdarma</a>
-            <a href="" class="btn btn-outline-secondary">Přihlásit se</a>
+            <a href="{{ route('student.login.show') }}" class="btn btn-outline-secondary">Přihlásit se</a>
         </div>
     </div>
 

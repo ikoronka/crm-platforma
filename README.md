@@ -73,6 +73,10 @@ The value of `GOOGLE_REDIRECT_URI` must also be registered in the Google Cloud c
 
 The UI now hides Google and lesson edit links when their routes are unavailable. If you don't see these links, ensure the routes are registered.
 
+### Custom login redirect
+
+Unauthenticated visitors are redirected to the appropriate login form based on the URL prefix (`/coach` or `/student`).
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
