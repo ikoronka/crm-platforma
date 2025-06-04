@@ -90,7 +90,7 @@ class StudentAuthController extends Controller
 
             /* <-- ZELENÝ banner po úspěšném přihlášení */
             return redirect()
-                   ->intended('/student/dashboard')
+                   ->route('student.dashboard')
                    ->with('success', 'Přihlášení proběhlo v pořádku.');
         }
 
