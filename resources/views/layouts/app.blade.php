@@ -10,14 +10,16 @@
 
     {{-- FLASH BANNERY --}}
     @if (session('success'))
-        <div id="flash-banner" class="alert alert-success position-fixed top-0 start-50 translate-middle-x mt-3 shadow">
+        <div id="flash-banner" class="alert alert-success alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3 shadow" role="alert">
             <span>{{ session('success') }}</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
     @if (session('error'))
-        <div id="flash-banner" class="alert alert-danger position-fixed top-0 start-50 translate-middle-x mt-3 shadow">
+        <div id="flash-banner" class="alert alert-danger alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3 shadow" role="alert">
             <span>{{ session('error') }}</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
@@ -32,16 +34,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     {{-- Skript pro flash banner a inicializaci carouselu --}}
     <script>
-        window.addEventListener('DOMContentLoaded', () => {
+        (() => {
             const banner = document.getElementById('flash-banner');
             if (banner) {
-                setTimeout(() => banner.remove(), 3000);
+                const alert = bootstrap.Alert.getOrCreateInstance(banner);
+                setTimeout(() => alert.close(), 3000);
             }
 
             document.querySelectorAll('.carousel').forEach(el => {
                 new bootstrap.Carousel(el);
             });
-        });
+        })();
     </script>
 </body>
 </html>
