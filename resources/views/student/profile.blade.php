@@ -75,10 +75,12 @@
 
         <button class="btn btn-primary">Save changes</button>
     </form>
-
-    <form method="POST" action="{{ route('student.profile.destroy') }}" class="mt-8">
-        @csrf
-        @method('DELETE')
-        <button class="btn btn-error" onclick="return confirm('Are you sure you want to delete your account?');">Delete account</button>
-    </form>
+    
+    @if (Route::has('student.profile.destroy'))
+        <form method="POST" action="{{ route('student.profile.destroy') }}" class="mt-8">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-error" onclick="return confirm('Are you sure you want to delete your account?');">Delete account</button>
+        </form>
+    @endif
 @endsection
