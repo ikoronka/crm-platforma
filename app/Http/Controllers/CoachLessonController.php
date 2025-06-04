@@ -12,11 +12,11 @@ class CoachLessonController extends Controller
      */
     public function show(Lesson $lesson)
     {
-        // Eager‐load vztahy, pokud je budete potřebovat (např. domácí úkoly, odevzdané práce)
+        // Eager-load related models (homework, submissions with students)
         $lesson->load([
-        'homework',             // pokud existuje vztah Lesson::homework()
-        'submissions.student',  // pokud existuje vztah Lesson::submissions() a Submission::student()
-    ]);
+            'homework',
+            'submissions.student',
+        ]);
 
         return view('coach.lesson-detail', compact('lesson'));
     }
