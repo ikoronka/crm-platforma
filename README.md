@@ -56,6 +56,19 @@ In order to ensure that the Laravel community is welcoming to all, please review
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
+## Google OAuth Setup
+
+This application uses [Laravel Socialite](https://laravel.com/docs/socialite) for Google authentication. Add your Google OAuth credentials to the `.env` file using the following variables:
+
+```
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GOOGLE_REDIRECT_URI="${APP_URL}/student/login/google/callback"
+```
+
+The value of `GOOGLE_REDIRECT_URI` must also be registered in the Google Cloud console under **Authorized redirect URIs**. For production deployments, replace `APP_URL` with your application's URL, for example:
+`https://crm-platforma-production.up.railway.app/student/login/google/callback`.
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

@@ -33,7 +33,10 @@
             <input name="password_confirmation" type="password" placeholder="Confirm password" class="form-control" required>
         </div>
 
+
         <button class="btn btn-primary w-100">Sign up</button>
+
+        @include('student.auth.google-login-button')
 
         <p class="text-center mt-3 small">
             Already have an account?
