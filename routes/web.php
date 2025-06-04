@@ -54,9 +54,15 @@ Route::prefix('coach')->name('coach.')->group(function () {
               ->name('courses.destroy');
 
         // Lesson management
-        Route::resource('lessons', CoachLessonController::class)->only([
-            'show', 'edit', 'update', 'destroy'
-        ]);
+        Route::get('lessons/{lesson}', [CoachLessonController::class, 'show'])
+            ->name('lessons.show');
+        Route::get('lessons/{lesson}/edit', [CoachLessonController::class, 'edit'])
+            ->name('lessons.edit');
+        Route::put('lessons/{lesson}', [CoachLessonController::class, 'update'])
+            ->name('lessons.update');
+        Route::delete('lessons/{lesson}', [CoachLessonController::class, 'destroy'])
+            ->name('lessons.destroy');
+      
         Route::put('submissions/{submission}/grade', [CoachLessonController::class, 'gradeSubmission'])
              ->name('submissions.grade');
 
