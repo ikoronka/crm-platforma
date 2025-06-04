@@ -53,10 +53,15 @@ Route::prefix('coach')->name('coach.')->group(function () {
          Route::delete('courses/{course}', [CoachCourseController::class, 'destroy'])
               ->name('courses.destroy');
 
-        // Lesson management – only show/edit/update/delete existing lessons
-        Route::resource('lessons', CoachLessonController::class)
-            ->only(['show', 'edit', 'update', 'destroy'])
-            ->names('lessons');
+        // Lesson management – show, edit, update, and delete lessons
+        Route::get('lessons/{lesson}', [CoachLessonController::class, 'show'])
+            ->name('lessons.show');
+        Route::get('lessons/{lesson}/edit', [CoachLessonController::class, 'edit'])
+            ->name('lessons.edit');
+        Route::put('lessons/{lesson}', [CoachLessonController::class, 'update'])
+            ->name('lessons.update');
+        Route::delete('lessons/{lesson}', [CoachLessonController::class, 'destroy'])
+            ->name('lessons.destroy');
 
         // Grading homework submissions
         Route::put('submissions/{submission}/grade', [CoachLessonController::class, 'gradeSubmission'])
