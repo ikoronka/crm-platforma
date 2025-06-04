@@ -29,6 +29,15 @@
             @error('email') <span class="text-error text-sm">{{ $message }}</span> @enderror
         </label>
 
+        {{-- Profile picture URL --}}
+        <label class="form-control">
+            <span class="label-text">Profile picture URL</span>
+            <input name="profile_picture" type="url"
+                   value="{{ old('profile_picture', $coach->profile_picture ?? '') }}"
+                   class="text-white input input-bordered w-full text-gray-900">
+            @error('profile_picture') <span class="text-error text-sm">{{ $message }}</span> @enderror
+        </label>
+
         {{-- Change password --}}
         <details class="collapse collapse-arrow bg-base-200">
             <summary class="collapse-title text-md font-medium">Change password</summary>
