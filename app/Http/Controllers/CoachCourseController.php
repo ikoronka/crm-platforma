@@ -117,4 +117,21 @@ class CoachCourseController extends Controller
 
         return view('coach.courses.course-detail', compact('course'));
     }
+
+    /**
+     * Delete the given course.
+     */
+    public function destroy(Course $course)
+    {
+        $coach = auth('coach')->user();
+        if ($course->coach_id !== $coach->id) {
+            abort(403);
+        }
+
+        $course->delete();
+
+        return redirect()
+            ->route('coach.dashboard')
+            ->with('success', 'Course deleted.');
+    }
 }

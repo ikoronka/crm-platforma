@@ -52,6 +52,20 @@ Route::prefix('coach')->name('coach.')->group(function () {
          Route::put('courses/{course}', [CoachCourseController::class, 'update'])
               ->name('courses.update');
 
+         // Delete course
+         Route::delete('courses/{course}', [CoachCourseController::class, 'destroy'])
+              ->name('courses.destroy');
+
+         // Lesson management
+         Route::get('lessons/{lesson}/edit', [CoachLessonController::class, 'edit'])
+              ->name('lessons.edit');
+         Route::put('lessons/{lesson}', [CoachLessonController::class, 'update'])
+              ->name('lessons.update');
+         Route::delete('lessons/{lesson}', [CoachLessonController::class, 'destroy'])
+              ->name('lessons.destroy');
+         Route::put('submissions/{submission}/grade', [CoachLessonController::class, 'gradeSubmission'])
+              ->name('submissions.grade');
+
 
         // Profile settings
         Route::get('profile', [CoachProfileController::class, 'show'])->name('profile');
