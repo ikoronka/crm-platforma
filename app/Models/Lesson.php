@@ -1,12 +1,12 @@
 <?php
-// App\Models\Lesson.php
+// Model reprezentující lekci
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Lesson extends Model
 {
-    protected $table = 'z_lessons'; // nebo jak se jmenuje tabulka
+    protected $table = 'z_lessons'; // název tabulky
 
     protected $fillable = [
         'course_id',
@@ -20,7 +20,7 @@ class Lesson extends Model
         'scheduled_at' => 'datetime',
     ];
 
-    // Vztah na kurz
+    // vazba na kurz
     public function course()
     {
         return $this->belongsTo(Course::class, 'course_id');

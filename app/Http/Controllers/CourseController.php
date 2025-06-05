@@ -13,18 +13,18 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        // Předpokládejme, že model Course má vztah "students" (many-to-many nebo hasMany)
-        // a třeba sloupec "registration_open" (boolean), "start_date", "end_date" apod.
+        // model Course má vztah students (many-to-many nebo hasMany)
+        // a obsahuje sloupce registration_open, start_date, end_date...
 
-        // Pokud chceš ošetřit, že pouze coach, který vlastní kurz, ho vidí:
+        // pokud je potřeba, ověř že kurz patří coachovi:
         // if (auth()->id() !== $course->coach_id) {
         //     abort(403);
         // }
 
-        // Eager-load studenty
+        // načíst i studenty
         $course->load('students');
 
-        // Např. zařídit, aby se datumy formátovaly pomocí Carbonu
+        // datumy se upraví přes Carbon
         $nextSession = null;
         if ($course->next_session_date) {
             $nextSession = Carbon::parse($course->next_session_date)->format('j.n.Y');
@@ -32,7 +32,7 @@ class CourseController extends Controller
 
         return view('courses.show', [
             'course'       => $course,
-            'nextSession'  => $nextSession,           // např. 1/2/3456
+            'nextSession'  => $nextSession,           // například 1/2/3456
             'startDate'    => Carbon::parse($course->start_date)->format('j.n.Y'),
             'endDate'      => Carbon::parse($course->end_date)->format('j.n.Y'),
             'registrationOpen' => (bool) $course->registration_open,

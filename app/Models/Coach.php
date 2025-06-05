@@ -10,7 +10,7 @@ class Coach extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    /** ↴ EXISTUJÍCÍ tabulka v dumpu */
+    /** Tabulka je už v dumpu */
     protected $table = 'z_coaches';
 
     protected $fillable = ['name','email','password',
@@ -21,9 +21,9 @@ class Coach extends Authenticatable
     public function courses()
     {
         return $this->hasMany(
-            Course::class,    // App\Models\Course
+            Course::class,    // cílový model
             'coach_id',       // sloupec v z_courses
-            'id'              // primární klíč v z_coaches
+            'id'              // primární klíč
         );
     }
 }

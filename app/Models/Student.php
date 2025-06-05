@@ -12,7 +12,7 @@ class Student extends Authenticatable
 {
     use HasFactory;
 
-    /** ← přidej toto */
+    /** tabulka studentů */
     protected $table = 'z_students';
 
     protected $fillable = [

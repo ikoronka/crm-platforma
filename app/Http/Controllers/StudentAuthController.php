@@ -38,11 +38,11 @@ class StudentAuthController extends Controller
         'email'           => $data['email'],
         'birth_year'      => $data['birth_year'],
         'password'        => Hash::make($data['password']),
-        // default profile picture
+        // výchozí obrázek
         'profile_picture' => 'https://www.pngkit.com/png/detail/126-1262807_instagram-default-profile-picture-png.png',
     ]);
 
-    // Odeslání jednoduchého login e-mailu:
+    // pošleme jednoduchý login e-mail
     Mail::to($student->email)->send(new StudentLogin($student));
 
     Auth::guard('student')->login($student);
@@ -60,7 +60,7 @@ class StudentAuthController extends Controller
     {
         $googleUser = Socialite::driver('google')->stateless()->user();
 
-        // Find or create the student in your DB
+        // najdi nebo vytvoř studenta
         $student = Student::firstOrCreate(
             ['email' => $googleUser->getEmail()],
             [
@@ -88,13 +88,13 @@ class StudentAuthController extends Controller
 
             $request->session()->regenerate();
 
-            /* <-- ZELENÝ banner po úspěšném přihlášení */
+            /* zelený banner po úspěchu */
             return redirect()
                    ->route('student.dashboard')
                    ->with('success', 'Přihlášení proběhlo v pořádku.');
         }
 
-        /* <-- ČERVENÝ banner při neplatných údajích */
+        /* červený banner pro špatné údaje */
         return back()
                ->withInput()
                ->with('error', 'Neplatné přihlašovací údaje.');
@@ -103,14 +103,14 @@ class StudentAuthController extends Controller
     /* ============ LOGOUT ============ */
     public function logout(Request $request)
     {
-        // 1) odhlášení guardu
+        // odhlášení guardu
         Auth::guard('student')->logout();
 
-        // 2) zneplatnit session (ochrana proti fixaci)
+        // zneplatnit session kvůli ochraně
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        // 3) přesměrovat domů s bannerem
+        // pak domů s bannerem
         return redirect('/')
                ->with('success', 'Byl(a) jsi úspěšně odhlášen(a).');
     }
@@ -126,12 +126,12 @@ class StudentAuthController extends Controller
     {
         $student = $request->user('student');
 
-        // Nejprve odhlásit studenty a zneplatnit session
+        // nejdřív odhlásit studenta a zneplatnit session
         Auth::guard('student')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        // Poté smazat záznam v DB
+        // pak smazat záznam
         $student->delete();
 
         return redirect('/')
