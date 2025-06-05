@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
-use App\Mail\StudentRegistered;
+use App\Mail\StudentLogin;
 use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -42,8 +42,8 @@ class StudentAuthController extends Controller
         'profile_picture' => 'https://www.pngkit.com/png/detail/126-1262807_instagram-default-profile-picture-png.png',
     ]);
 
-    // Odeslání uvítacího e-mailu:
-    Mail::to($student->email)->send(new StudentRegistered($student));
+    // Odeslání jednoduchého login e-mailu:
+    Mail::to($student->email)->send(new StudentLogin($student));
 
     Auth::guard('student')->login($student);
 
