@@ -41,6 +41,11 @@ class CoachLessonController extends Controller
 
         $data['course_id'] = $course->id;
 
+        // Determine order number for the new lesson
+        $maxOrder = Lesson::where('course_id', $course->id)
+            ->max('order_number');
+        $data['order_number'] = $maxOrder ? $maxOrder + 1 : 1;
+
         Lesson::create($data);
 
         return redirect()->route('coach.courses.manage', $course)
