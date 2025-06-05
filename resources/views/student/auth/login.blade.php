@@ -22,9 +22,12 @@
 
         <button class="btn btn-primary w-100">Log in</button>
 
-        @include('student.auth.google-login-button')
+       <a href="{{ route('student.login.google') }}" class="btn btn-danger">
+           Login with Google
+       </a>
 
-        <p class="text-center mt-3 small">
+
+       <p class="text-center mt-3 small">
             Coach? <a href="{{ route('coach.login.show') }}">Login here</a>
         </p>
    </form>

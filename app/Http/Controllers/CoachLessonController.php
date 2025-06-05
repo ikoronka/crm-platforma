@@ -4,94 +4,85 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Lesson;
+use App\Models\Submission;
 
 class CoachLessonController extends Controller
 {
     /**
-     * Zobrazí detail konkrétní lekce (pro kouče).
+     * Display the specified lesson.
+     *
+     * @param  \App\Models\Lesson  $lesson
+     * @return \Illuminate\View\View
      */
     public function show(Lesson $lesson)
     {
-        // Eager-load related models (homework, submissions with students)
-        $lesson->load([
-            'homework',
-            'submissions.student',
-        ]);
-
-        return view('coach.lesson-detail', compact('lesson'));
+        return view('coach.lessons.lesson-detail', compact('lesson'));
     }
 
     /**
-     * Show the form for editing a lesson.
+     * Show the form for editing the specified lesson.
+     *
+     * @param  \App\Models\Lesson  $lesson
+     * @return \Illuminate\View\View
      */
     public function edit(Lesson $lesson)
     {
-        $coach = auth('coach')->user();
-        if ($lesson->course->coach_id !== $coach->id) {
-            abort(403);
-        }
-
         return view('coach.lessons.edit', compact('lesson'));
     }
 
     /**
-     * Update the given lesson.
+     * Update the specified lesson in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Lesson  $lesson
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Lesson $lesson)
     {
-        $coach = auth('coach')->user();
-        if ($lesson->course->coach_id !== $coach->id) {
-            abort(403);
-        }
-
         $data = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string'],
-            'scheduled_at' => ['nullable', 'date'],
+            'title'        => 'required|string|max:255',
+            'description'  => 'nullable|string',
+            'lesson_date' => 'nullable|date',
         ]);
 
         $lesson->update($data);
 
-        return redirect()
-            ->route('coach.lessons.show', $lesson)
-            ->with('success', 'Lesson updated.');
+        return redirect()->route('coach.lessons.lesson-detail', $lesson)
+            ->with('success', 'Lesson updated successfully.');
     }
 
     /**
-     * Remove the specified lesson.
+     * Remove the specified lesson from storage.
+     *
+     * @param  \App\Models\Lesson  $lesson
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Lesson $lesson)
     {
-        $coach = auth('coach')->user();
-        if ($lesson->course->coach_id !== $coach->id) {
-            abort(403);
-        }
-        $course = $lesson->course;
         $lesson->delete();
 
-        return redirect()
-            ->route('coach.courses.manage', $course)
-            ->with('success', 'Lesson deleted.');
+        return redirect()->route('coach.dashboard')
+            ->with('success', 'Lesson deleted successfully.');
     }
 
     /**
-     * Assign a grade to a submission.
+     * Grade a homework submission.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Submission  $submission
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function gradeSubmission(Request $request, \App\Models\Submission $submission)
+    public function gradeSubmission(Request $request, Submission $submission)
     {
-        $coach = auth('coach')->user();
-        $lesson = $submission->homework->lesson;
-        if ($lesson->course->coach_id !== $coach->id) {
-            abort(403);
-        }
-
         $data = $request->validate([
-            'grade' => ['required', 'integer', 'min:1', 'max:5'],
+            'grade' => 'required|numeric|min:0|max:100',
         ]);
 
-        $submission->grade = $data['grade'];
-        $submission->save();
+        $submission->update([
+            'grade' => $data['grade']
+        ]);
 
-        return back()->with('success', 'Grade saved.');
+        return redirect()->back()
+            ->with('success', 'Submission graded successfully.');
     }
 }

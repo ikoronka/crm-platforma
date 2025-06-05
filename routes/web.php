@@ -10,6 +10,8 @@ use App\Http\Controllers\StudentCourseController;
 use App\Http\Controllers\StudentProfileController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\GoogleController;
+
 Route::view('/', 'home');
 
 /* ==================  COACH  ================== */
@@ -55,7 +57,7 @@ Route::prefix('coach')->name('coach.')->group(function () {
 
         // Lesson management – show, edit, update, and delete lessons
         Route::get('lessons/{lesson}', [CoachLessonController::class, 'show'])
-            ->name('lessons.show');
+            ->name('lessons.lesson-detail');
         Route::get('lessons/{lesson}/edit', [CoachLessonController::class, 'edit'])
             ->name('lessons.edit');
         Route::put('lessons/{lesson}', [CoachLessonController::class, 'update'])
@@ -83,9 +85,13 @@ Route::prefix('student')->name('student.')->group(function () {
         Route::get('register', [StudentAuthController::class,'showRegister'])->name('register.show');
         Route::post('login',    [StudentAuthController::class,'login'])->name('login');
         Route::post('register', [StudentAuthController::class,'register'])->name('register');
-        Route::get('login/google', [StudentAuthController::class, 'redirectToGoogle'])
+
+        Route::get('login/google', [GoogleController::class, 'redirectToGoogle'])
             ->name('login.google');
-        Route::get('login/google/callback', [StudentAuthController::class, 'handleGoogleCallback']);
+
+        Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])
+            ->name('google.callback');
+
 
     });
 
@@ -104,5 +110,8 @@ Route::prefix('student')->name('student.')->group(function () {
             ->name('profile.update');
         Route::delete('profile', [StudentProfileController::class, 'destroy'])
             ->name('profile.destroy');
+
+        Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])
+            ->name('google.callback');
     });
 });

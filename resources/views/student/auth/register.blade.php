@@ -18,11 +18,11 @@
         <div class="mb-3">
             <input name="email" type="email" placeholder="E-mail" class="form-control" required>
         </div>
-       
+
         <div class="mb-3">
             <input name="birth_year" type="number" min="1900" max="{{ date('Y') }}" class="form-control" value="{{ old('birth_year') }}" required>
         </div>
-           
+
         {{-- Password --}}
         <div class="mb-3">
             <input name="password" type="password" placeholder="Password" class="form-control" required>
@@ -36,9 +36,11 @@
 
         <button class="btn btn-primary w-100">Sign up</button>
 
-        @include('student.auth.google-login-button')
+       <a href="{{ route('student.login.google') }}" class="btn btn-danger">
+           Login with Google
+       </a>
 
-        <p class="text-center mt-3 small">
+       <p class="text-center mt-3 small">
             Already have an account?
             <a href="{{ route('student.login.show') }}">Log in</a>
         </p>

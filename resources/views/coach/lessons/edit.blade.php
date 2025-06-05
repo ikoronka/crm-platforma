@@ -32,7 +32,7 @@
 
             <div class="d-flex justify-content-between align-items-center mt-4">
                 <button type="submit" class="btn btn-primary">Save Changes</button>
-                <a href="{{ route('coach.lessons.show', $lesson) }}">Cancel</a>
+                <a href="{{ route('coach.lessons.lesson-detail', $lesson) }}">Cancel</a>
             </div>
         </form>
 

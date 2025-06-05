@@ -45,7 +45,7 @@
                                     </p>
                                 </div>
                                 <div class="d-flex gap-2">
-                                    <a href="{{ route('coach.lessons.show', $lesson) }}" class="btn btn-sm btn-outline">View</a>
+                                    <a href="{{ route('coach.lessons.lesson-detail', $lesson) }}" class="btn btn-sm btn-outline">View</a>
                                     @if(Route::has('coach.lessons.edit'))
                                         <a href="{{ route('coach.lessons.edit', $lesson) }}" class="btn btn-sm">Edit</a>
                                     @endif
