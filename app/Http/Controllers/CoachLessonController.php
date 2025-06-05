@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Lesson;
 use App\Models\Submission;
+use App\Models\Course;
 
 class CoachLessonController extends Controller
 {
@@ -17,6 +18,33 @@ class CoachLessonController extends Controller
     public function show(Lesson $lesson)
     {
         return view('coach.lessons.lesson-detail', compact('lesson'));
+    }
+
+    /**
+     * Show the form for creating a new lesson for given course.
+     */
+    public function create(Course $course)
+    {
+        return view('coach.lessons.create', compact('course'));
+    }
+
+    /**
+     * Store a newly created lesson.
+     */
+    public function store(Request $request, Course $course)
+    {
+        $data = $request->validate([
+            'title'        => 'required|string|max:255',
+            'description'  => 'nullable|string',
+            'scheduled_at' => 'nullable|date',
+        ]);
+
+        $data['course_id'] = $course->id;
+
+        Lesson::create($data);
+
+        return redirect()->route('coach.courses.manage', $course)
+            ->with('success', 'Lesson created successfully.');
     }
 
     /**
@@ -42,7 +70,7 @@ class CoachLessonController extends Controller
         $data = $request->validate([
             'title'        => 'required|string|max:255',
             'description'  => 'nullable|string',
-            'lesson_date' => 'nullable|date',
+            'scheduled_at' => 'nullable|date',
         ]);
 
         $lesson->update($data);
