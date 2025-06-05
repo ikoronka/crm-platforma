@@ -106,7 +106,7 @@ Route::prefix('student')->name('student.')->group(function () {
         Route::post('logout', [StudentAuthController::class,'logout'])->name('logout');
         Route::get('dashboard', [StudentAuthController::class, 'dashboard'])
             ->name('dashboard');
-        Route::get('open-courses', [StudentCourseController::class, 'index'])
+        Route::get('open-courses', [StudentCourseController::class, 'open'])
             ->name('open');
         Route::get('courses/{course}', [StudentCourseController::class, 'show'])
             ->name('courses.show');
@@ -114,6 +114,8 @@ Route::prefix('student')->name('student.')->group(function () {
             ->name('lessons.show');
         Route::post('courses/{course}/enroll', [StudentCourseController::class, 'enroll'])
             ->name('courses.enroll');
+        Route::delete('courses/{course}/enroll', [StudentCourseController::class, 'unenroll'])
+            ->name('courses.unenroll');
         Route::get('profile',  [StudentProfileController::class, 'show'])
             ->name('profile');
         Route::put('profile', [StudentProfileController::class, 'update'])

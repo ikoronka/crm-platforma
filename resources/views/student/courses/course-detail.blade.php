@@ -28,7 +28,19 @@
         </div>
         @endif
         <div class="card-footer text-end">
-            <a href="{{ route('student.dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+            @if($isEnrolled)
+                <form action="{{ route('student.courses.unenroll', $course) }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Unenroll</button>
+                </form>
+            @elseif($course->start_date->isFuture())
+                <form action="{{ route('student.courses.enroll', $course) }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">Enroll</button>
+                </form>
+            @endif
+            <a href="{{ route('student.open') }}" class="btn btn-secondary">Back to Courses</a>
         </div>
     </div>
 </div>
