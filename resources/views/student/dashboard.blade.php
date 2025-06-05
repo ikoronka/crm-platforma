@@ -15,7 +15,7 @@
         <div class="col-md-4 mb-3">
             <div class="card h-100 shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $course->title }}</h5>
+                    <h5 class="card-title">{{ $course->name }}</h5>
                     <p class="card-text">{{ $course->description }}</p>
                     <a href="{{ route('student.courses.show', $course) }}" class="btn btn-primary">View Course</a>
                 </div>
