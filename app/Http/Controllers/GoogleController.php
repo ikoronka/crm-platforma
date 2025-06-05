@@ -1,5 +1,5 @@
 <?php
-// File: app/Http/Controllers/Auth/GoogleController.php
+// Controller pro Google OAuth
 
 namespace App\Http\Controllers;
 

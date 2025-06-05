@@ -34,7 +34,7 @@ class StudentRegistered extends Mailable
         return $this
             ->subject('Vítej v naší aplikaci!')
             ->view('emails.student-registered')
-            // můžeš ještě přidat např. ->from('no-reply@mojeapp.cz', 'Moje Appka')
+            // kdybys chtěl, můžeš doplnit ->from('no-reply@mojeapp.cz', 'Moje Appka')
             ;
     }
 }
