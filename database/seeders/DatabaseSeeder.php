@@ -46,6 +46,7 @@ class DatabaseSeeder extends Seeder
         for ($i = 1; $i <= 6; $i++) {
             DB::table('z_homework')->insert([
                 'id' => $i,
+                'lesson_id' => $i,
                 'title' => "Úkol k lekci $i",
                 'description' => "Instrukce k úkolu $i",
                 'open_at' => '2025-06-01 10:00:00',

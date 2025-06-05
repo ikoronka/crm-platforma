@@ -28,7 +28,7 @@ class Lesson extends Model
 
     public function homework()
     {
-        return $this->hasOne(Homework::class, 'id');
+        return $this->hasOne(Homework::class, 'lesson_id');
     }
 
     public function submissions()
