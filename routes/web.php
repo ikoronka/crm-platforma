@@ -100,12 +100,15 @@ Route::prefix('student')->name('student.')->group(function () {
     });
 
     Route::middleware('auth:student')->group(function () {
-        Route::view('dashboard', 'student.dashboard')->name('dashboard');
+        Route::get('dashboard', [StudentCourseController::class, 'index'])
+            ->name('dashboard');
         Route::post('logout', [StudentAuthController::class,'logout'])->name('logout');
         Route::get('dashboard', [StudentAuthController::class, 'dashboard'])
             ->name('dashboard');
         Route::get('open-courses', [StudentCourseController::class, 'index'])
             ->name('open');
+        Route::get('courses/{course}', [StudentCourseController::class, 'show'])
+            ->name('courses.show');
         Route::post('courses/{course}/enroll', [StudentCourseController::class, 'enroll'])
             ->name('courses.enroll');
         Route::get('profile',  [StudentProfileController::class, 'show'])

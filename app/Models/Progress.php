@@ -8,7 +8,7 @@ class Progress extends Model
 {
     protected $table = 'z_progress';
 
-    protected $fillable = ['student_id', 'id', 'completed_at'];
+    protected $fillable = ['student_id', 'lesson_id', 'completed_at'];
 
     public function student()
     {

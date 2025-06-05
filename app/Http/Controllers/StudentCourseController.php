@@ -2,35 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentCourseController extends Controller
 {
-    /** Zobrazí seznam kurzů, do kterých student ještě není zapsán */
-    public function index(Request $request)
+    /**
+     * Display the student dashboard with their enrolled courses.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index()
     {
-        $student = $request->user('student');
+        // Get the authenticated student using the correct guard (adjust if necessary)
+        $student = auth()->guard('student')->user();
 
-        // kurzy, které student nemá v pivotu z_enrollments
-        $courses = Course::whereNotIn('id',
-                        $student->courses()->pluck('z_courses.id'))
-                   ->orderBy('name')
-                   ->get();
+        // Assuming your Student model has a "courses" relationship
+        $courses = $student->courses;
 
-        return view('student.open-courses', compact('courses'));
+        // Return the dashboard view and pass the courses data
+        return view('student.dashboard', compact('courses'));
     }
 
-    /** Zapíše studenta do vybraného kurzu */
-    public function enroll(Request $request, Course $course)
+    /**
+     * Display the specified course.
+     *
+     * @param  \App\Models\Course  $course
+     * @return \Illuminate\View\View
+     */
+    public function show(Course $course)
     {
-        $student = $request->user('student');
-
-        if (! $student->courses()->whereKey($course->id)->exists()) {
-            $student->courses()->attach($course->id);   // zapíše pivot z_enrollments
-        }
-
-        return back()->with('success',
-            'Úspěšně zapsáno do kurzu „'.$course->name.'“.');
+        return view('courses.course-detail', compact('course'));
     }
+
 }
