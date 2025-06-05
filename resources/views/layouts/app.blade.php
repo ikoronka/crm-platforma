@@ -10,14 +10,14 @@
 
     {{-- FLASH BANNERY --}}
     @if (session('success'))
-        <div id="flash-banner" class="alert alert-success alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3 shadow" role="alert">
+        <div id="flash-banner" class="z-1 alert alert-success alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3 shadow" role="alert">
             <span>{{ session('success') }}</span>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
     @if (session('error'))
-        <div id="flash-banner" class="alert alert-danger alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3 shadow" role="alert">
+        <div id="flash-banner" class="z-1 alert alert-danger alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3 shadow" role="alert">
             <span>{{ session('error') }}</span>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>

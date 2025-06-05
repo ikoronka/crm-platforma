@@ -51,7 +51,9 @@ class StudentCourseController extends Controller
         $student = auth()->guard('student')->user();
 
         if ($course->start_date->isFuture()) {
-            $student->courses()->syncWithoutDetaching([$course->id]);
+            $student->courses()->syncWithoutDetaching([
+                $course->id => ['enrolled_at' => now()]
+            ]);
         }
 
         return back()->with('success', 'You have been enrolled in the course.');
