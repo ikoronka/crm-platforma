@@ -73,9 +73,9 @@ class DatabaseSeeder extends Seeder
         // Progress
         for ($i = 1; $i <= 6; $i++) {
             DB::table('z_progress')->insert([
-                'student_id' => rand(1, 3),
-                'id' => $i,
-                'completed_at' => '2025-06-02 17:00:00',
+                'student_id'  => rand(1, 3),
+                'lesson_id'   => $i,
+                'completed_at'=> '2025-06-02 17:00:00',
             ]);
         }
 
