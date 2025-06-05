@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Laravel\Socialite\Facades\Socialite;
-use App\Models\User;
+use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+
 
 class GoogleController extends Controller
 {
@@ -25,23 +25,18 @@ class GoogleController extends Controller
     public function handleGoogleCallback()
     {
         $googleUser = Socialite::driver('google')->stateless()->user();
-        $user = Student::where('email', $googleUser->getEmail())->first();
-        if (!$user) {
-            $user = Student::create([
-                'name'  => $googleUser->getName(),
-                'email' => $googleUser->getEmail(),
-                // Assign other necessary default values here
-                // If you store a password, consider generating a random one or leaving it null for OAuth
-                'password' => bcrypt(str_random(16)), // or null if allowed
-            ]);
-        }
 
-        // Using the 'student' guard as an example:
-        Auth::guard('student')->login($user);
-        // Log the user in.
-        Auth::login($user, true);
+        $student = Student::firstOrCreate(
+            ['email' => $googleUser->getEmail()],
+            [
+                'name'            => $googleUser->getName(),
+                'oauth_provider'  => 'google',
+                'profile_picture' => $googleUser->getAvatar(),
+            ]
+        );
 
-        // Redirect to a desired location (e.g., dashboard)
-        return redirect()->intended(route('student.dashboard'));
+        Auth::guard('student')->login($student);
+
+        return redirect()->route('student.dashboard');
     }
 }
