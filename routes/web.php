@@ -55,7 +55,11 @@ Route::prefix('coach')->name('coach.')->group(function () {
          Route::delete('courses/{course}', [CoachCourseController::class, 'destroy'])
               ->name('courses.destroy');
 
-        // Lesson management – show, edit, update, and delete lessons
+        // Lesson management – create, store, show, edit, update, and delete lessons
+        Route::get('courses/{course}/lessons/create', [CoachLessonController::class, 'create'])
+            ->name('lessons.create');
+        Route::post('courses/{course}/lessons', [CoachLessonController::class, 'store'])
+            ->name('lessons.store');
         Route::get('lessons/{lesson}', [CoachLessonController::class, 'show'])
             ->name('lessons.lesson-detail');
         Route::get('lessons/{lesson}/edit', [CoachLessonController::class, 'edit'])

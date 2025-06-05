@@ -7,12 +7,15 @@
 @section('coach-content')
     <div class="space-y-8">
 
-        {{-- Název kurzu a tlačítko zpět --}}
+        {{-- Název kurzu a tlačítka --}}
         <div class="flex justify-between items-center">
             <h1 class="text-4xl font-bold">{{ $course->name }}</h1>
-            <a href="{{ route('coach.dashboard') }}" class="btn btn-sm btn-outline">
-                ← Back to Dashboard
-            </a>
+            <div class="flex gap-2">
+                <a href="{{ route('coach.lessons.create', $course) }}" class="btn btn-sm btn-primary">Create Lesson</a>
+                <a href="{{ route('coach.dashboard') }}" class="btn btn-sm btn-outline">
+                    ← Back to Dashboard
+                </a>
+            </div>
         </div>
 
         {{-- Popis kurzu --}}
