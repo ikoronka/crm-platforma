@@ -7,6 +7,7 @@ use App\Http\Controllers\CoachLessonController;
 
 use App\Http\Controllers\StudentAuthController;
 use App\Http\Controllers\StudentCourseController;
+use App\Http\Controllers\StudentLessonController;
 use App\Http\Controllers\StudentProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -109,6 +110,8 @@ Route::prefix('student')->name('student.')->group(function () {
             ->name('open');
         Route::get('courses/{course}', [StudentCourseController::class, 'show'])
             ->name('courses.show');
+        Route::get('lessons/{lesson}', [StudentLessonController::class, 'show'])
+            ->name('lessons.show');
         Route::post('courses/{course}/enroll', [StudentCourseController::class, 'enroll'])
             ->name('courses.enroll');
         Route::get('profile',  [StudentProfileController::class, 'show'])

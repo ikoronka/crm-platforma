@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Course;
 
 class StudentCourseController extends Controller
 {
@@ -32,7 +33,9 @@ class StudentCourseController extends Controller
      */
     public function show(Course $course)
     {
-        return view('courses.course-detail', compact('course'));
+        $course->load('lessons');
+
+        return view('student.courses.course-detail', compact('course'));
     }
 
 }

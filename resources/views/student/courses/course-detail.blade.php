@@ -1,13 +1,13 @@
 @extends('layouts.student')
 @php($sidebarActive = 'courses')
 
-@section('title', $course->title)
+@section('title', $course->name)
 
 @section('student-content')
 <div class="container my-4">
     <div class="card shadow-sm">
         <div class="card-header bg-info text-white">
-            <h2 class="h5 mb-0">{{ $course->title }}</h2>
+            <h2 class="h5 mb-0">{{ $course->name }}</h2>
         </div>
         <div class="card-body">
             <p><strong>Description:</strong></p>
@@ -19,7 +19,7 @@
             <ul class="list-group">
                 @foreach($course->lessons as $lesson)
                 <li class="list-group-item">
-                    <a href="">
+                    <a href="{{ route('student.lessons.show', $lesson) }}">
                         {{ $lesson->title }}
                     </a>
                 </li>
