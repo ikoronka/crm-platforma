@@ -25,6 +25,9 @@
                 <li class="nav-item">
                     <a href="{{ route('student.login.show') }}" class="btn btn-sm btn-outline-light">Login as Student</a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('student.register.show') }}" class="btn btn-sm btn-outline-light">Make a Student account</a>
+                </li>
                 @endif
                 @endauth
 

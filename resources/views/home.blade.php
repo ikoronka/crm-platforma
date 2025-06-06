@@ -43,5 +43,53 @@
         </div>
     </div>
 </section>
+    @php
+    $courses = \App\Models\Course::with(['coach','lessons'])->take(3)->get();
+    @endphp
+
+    <section class="featured-courses mt-5">
+        <h2 class="mb-4">Featured Courses</h2>
+        <div class="row">
+            @foreach($courses as $course)
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $course->name }}</h5>
+                        <p class="card-text">
+                            {{ \Illuminate\Support\Str::limit($course->description, 100) }}
+                        </p>
+                        <p>
+                            <strong>Coach:</strong>
+                            {{ $course->coach->name ?? 'N/A' }}
+                        </p>
+                        <p>
+                            <strong>Start Date:</strong>
+                            {{ $course->start_date ? $course->start_date->format('j.n.Y') : 'N/A' }}
+                        </p>
+                        @php
+                        $nextLesson = $course->lessons
+                        ->where('scheduled_at', '>=', now())
+                        ->sortBy('scheduled_at')
+                        ->first();
+                        @endphp
+                        <p>
+                            <strong>Next Lesson:</strong>
+                            @if ($nextLesson)
+                            {{ $nextLesson->scheduled_at->format('j.n.Y') }}
+                            @else
+                            No upcoming lesson
+                            @endif
+                        </p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="{{ route('courses.show', $course) }}" class="btn btn-primary">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </section>
 
 @endsection
