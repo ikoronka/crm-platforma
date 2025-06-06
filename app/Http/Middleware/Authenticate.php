@@ -14,9 +14,9 @@ class Authenticate extends Middleware
         }
 
         if ($request->is('coach/*')) {
-            return route('coach.login.show');
+            return secure_route('coach.login.show');
         }
 
-        return route('student.login.show');
+        return secure_route('student.login.show');
     }
 }

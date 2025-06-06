@@ -30,7 +30,7 @@ class GoogleController extends Controller
             Log::info('Google user details:', ['user' => $googleUser]);
         } catch (\Exception $e) {
             Log::error('Error during Google callback: ' . $e->getMessage());
-            return redirect()->route('student.login.show')->withErrors('Something went wrong during Google authentication.');
+            return redirect()->secure_route('student.login.show')->withErrors('Something went wrong during Google authentication.');
         }
 
         $student = Student::firstOrCreate(
@@ -46,6 +46,6 @@ class GoogleController extends Controller
 
         Auth::guard('student')->login($student);
 
-        return redirect()->route('student.dashboard');
+        return redirect()->secure_route('student.dashboard');
     }
 }

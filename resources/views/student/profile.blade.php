@@ -8,7 +8,7 @@
 
     {{-- FLASH bannery už máš v layouts.app (success / error) --}}
 
-    <form method="POST" action="{{ route('student.profile.update') }}" class="mb-4" style="max-width: 600px;">
+    <form method="POST" action="{{ secure_route('student.profile.update') }}" class="mb-4" style="max-width: 600px;">
         @csrf
         @method('PUT')
 
@@ -72,9 +72,9 @@
 
         <button class="btn btn-primary">Save changes</button>
     </form>
-    
+
     @if (Route::has('student.profile.destroy'))
-        <form method="POST" action="{{ route('student.profile.destroy') }}" class="mt-8">
+        <form method="POST" action="{{ secure_route('student.profile.destroy') }}" class="mt-8">
             @csrf
             @method('DELETE')
             <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete your account?');">Delete account</button>

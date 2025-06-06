@@ -7,7 +7,7 @@
 @section('coach-content')
     <h1 class="h3 mb-4">Profile Settings (Coach)</h1>
 
-    <form method="POST" action="{{ route('coach.profile.update') }}" class="mb-4" style="max-width: 600px;">
+    <form method="POST" action="{{ secure_route('coach.profile.update') }}" class="mb-4" style="max-width: 600px;">
         @csrf
         @method('PUT')
 

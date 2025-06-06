@@ -11,10 +11,10 @@
                 @auth('student')
                 {{-- Student is logged in --}}
                 <li class="nav-item">
-                    <a href="{{ route('student.dashboard') }}" class="btn btn-sm btn-light">Dashboard (Student)</a>
+                    <a href="{{ secure_route('student.dashboard') }}" class="btn btn-sm btn-light">Dashboard (Student)</a>
                 </li>
                 <li class="nav-item">
-                    <form method="POST" action="{{ route('student.logout') }}" class="d-inline">
+                    <form method="POST" action="{{ secure_route('student.logout') }}" class="d-inline">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-outline-light">Logout Student</button>
                     </form>
@@ -23,10 +23,10 @@
                 {{-- Only show Student Login if no coach is logged in --}}
                 @if(!Auth::guard('coach')->check())
                 <li class="nav-item">
-                    <a href="{{ route('student.login.show') }}" class="btn btn-sm btn-outline-light">Login as Student</a>
+                    <a href="{{ secure_route('student.login.show') }}" class="btn btn-sm btn-outline-light">Login as Student</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('student.register.show') }}" class="btn btn-sm btn-outline-light">Make a Student account</a>
+                    <a href="{{ secure_route('student.register.show') }}" class="btn btn-sm btn-outline-light">Make a Student account</a>
                 </li>
                 @endif
                 @endauth
@@ -35,10 +35,10 @@
                 @auth('coach')
                 {{-- Coach is logged in --}}
                 <li class="nav-item">
-                    <a href="{{ route('coach.dashboard') }}" class="btn btn-sm btn-light">Dashboard (Coach)</a>
+                    <a href="{{ secure_route('coach.dashboard') }}" class="btn btn-sm btn-light">Dashboard (Coach)</a>
                 </li>
                 <li class="nav-item">
-                    <form method="POST" action="{{ route('coach.logout') }}" class="d-inline">
+                    <form method="POST" action="{{ secure_route('coach.logout') }}" class="d-inline">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-outline-light">Logout Coach</button>
                     </form>
@@ -47,7 +47,7 @@
                 {{-- Only show Coach Login if no student is logged in --}}
                 @if(!Auth::guard('student')->check())
                 <li class="nav-item">
-                    <a href="{{ route('coach.login.show') }}" class="btn btn-sm btn-outline-light">Login as Coach</a>
+                    <a href="{{ secure_route('coach.login.show') }}" class="btn btn-sm btn-outline-light">Login as Coach</a>
                 </li>
                 @endif
                 @endauth
@@ -55,10 +55,10 @@
                 {{-- === ADMIN SECTION === --}}
                 @auth('admin')
                 <li class="nav-item">
-                    <a href="{{ route('admin.dashboard') }}" class="btn btn-sm btn-light">Dashboard (Admin)</a>
+                    <a href="{{ secure_route('admin.dashboard') }}" class="btn btn-sm btn-light">Dashboard (Admin)</a>
                 </li>
                 <li class="nav-item">
-                    <form method="POST" action="{{ route('admin.logout') }}" class="d-inline">
+                    <form method="POST" action="{{ secure_route('admin.logout') }}" class="d-inline">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-outline-light">Logout Admin</button>
                     </form>
@@ -66,7 +66,7 @@
                 @else
                 @if(!Auth::guard('coach')->check() && !Auth::guard('student')->check())
                 <li class="nav-item">
-                    <a href="{{ route('admin.login.show') }}" class="btn btn-sm btn-outline-light">Login as Admin</a>
+                    <a href="{{ secure_route('admin.login.show') }}" class="btn btn-sm btn-outline-light">Login as Admin</a>
                 </li>
                 @endif
                 @endauth

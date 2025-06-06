@@ -13,7 +13,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $course->name }}</h5>
                         <p class="card-text">{{ $course->description }}</p>
-                        <a href="{{ route('student.courses.show', $course) }}" class="btn btn-primary">View Details</a>
+                        <a href="{{ secure_route('student.courses.show', $course) }}" class="btn btn-primary">View Details</a>
                     </div>
                 </div>
             </div>

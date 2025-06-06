@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
-   <form method="POST" action="{{ route('coach.login') }}" class="border rounded p-4 shadow w-100" style="max-width: 400px;">
+   <form method="POST" action="{{ secure_route('coach.login') }}" class="border rounded p-4 shadow w-100" style="max-width: 400px;">
         @csrf
         <h2 class="h4 text-center mb-3">Coach login</h2>
 
@@ -26,7 +26,7 @@
         <button class="btn btn-primary w-100">Log in</button>
 
         <p class="text-center mt-3 small">
-            Student? <a href="{{ route('student.login.show') }}">Login here</a>
+            Student? <a href="{{ secure_route('student.login.show') }}">Login here</a>
         </p>
    </form>
 </div>

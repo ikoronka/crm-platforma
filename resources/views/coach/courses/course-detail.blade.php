@@ -11,8 +11,8 @@
         <div class="flex justify-between items-center">
             <h1 class="text-4xl font-bold">{{ $course->name }}</h1>
             <div class="flex gap-2">
-                <a href="{{ route('coach.lessons.create', $course) }}" class="btn btn-sm btn-primary">Create Lesson</a>
-                <a href="{{ route('coach.dashboard') }}" class="btn btn-sm btn-outline">
+                <a href="{{ secure_route('coach.lessons.create', $course) }}" class="btn btn-sm btn-primary">Create Lesson</a>
+                <a href="{{ secure_route('coach.dashboard') }}" class="btn btn-sm btn-outline">
                     ← Back to Dashboard
                 </a>
             </div>
@@ -49,9 +49,9 @@
                                     </p>
                                 </div>
                                 <div class="d-flex gap-2">
-                                    <a href="{{ route('coach.lessons.lesson-detail', $lesson) }}" class="btn btn-sm btn-outline">View</a>
+                                    <a href="{{ secure_route('coach.lessons.lesson-detail', $lesson) }}" class="btn btn-sm btn-outline">View</a>
                                     @if(Route::has('coach.lessons.edit'))
-                                        <a href="{{ route('coach.lessons.edit', $lesson) }}" class="btn btn-sm">Edit</a>
+                                        <a href="{{ secure_route('coach.lessons.edit', $lesson) }}" class="btn btn-sm">Edit</a>
                                     @endif
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
 
         {{-- Tlačítko pro úpravu kurzu --}}
         <section>
-            <a href="{{ route('coach.courses.edit', $course) }}" class="btn btn-primary">
+            <a href="{{ secure_route('coach.courses.edit', $course) }}" class="btn btn-primary">
                 Edit Course
             </a>
         </section>
