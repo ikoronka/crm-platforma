@@ -26,7 +26,7 @@
             <div class="mb-3">
                 <label class="form-label">Scheduled At</label>
                 <input type="datetime-local" name="scheduled_at" value="{{ old('scheduled_at') }}" class="form-control">
-                @error('scheduled_at')<div class="text-danger small">{{ $message }}</div>@enderror
+                @error('scheduled_at')<div class="text-danger small" required>{{ $message }}</div>@enderror
             </div>
 
             <div class="d-flex justify-content-between align-items-center mt-4">

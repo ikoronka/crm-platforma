@@ -8,9 +8,12 @@
         @csrf
         <h2 class="h4 text-center mb-3">Coach login</h2>
 
+       <label for="email">Email</label>
         <div class="mb-3">
             <input name="email" type="email" placeholder="E-mail" class="form-control" required autofocus>
         </div>
+
+       <label for="email">Email</label>
         <div class="mb-3">
             <input name="password" type="password" placeholder="Password" class="form-control" required>
         </div>

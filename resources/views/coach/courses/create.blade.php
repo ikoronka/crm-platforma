@@ -21,7 +21,7 @@
 
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
-                <textarea name="description" id="description" rows="4" class="form-control">{{ old('description') }}</textarea>
+                <textarea name="description" id="description" rows="4" class="form-control" required>{{ old('description') }}</textarea>
                 @error('description')
                     <div class="text-danger small">{{ $message }}</div>
                 @enderror
@@ -30,14 +30,14 @@
             <div class="row g-3">
                 <div class="col-md-6">
                     <label class="form-label" for="start_date">Start Date</label>
-                    <input type="date" name="start_date" id="start_date" value="{{ old('start_date') }}" class="form-control">
+                    <input type="date" name="start_date" id="start_date" value="{{ old('start_date') }}" class="form-control" required>
                     @error('start_date')
                         <div class="text-danger small">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-md-6">
                     <label class="form-label" for="end_date">End Date</label>
-                    <input type="date" name="end_date" id="end_date" value="{{ old('end_date') }}" class="form-control">
+                    <input type="date" name="end_date" id="end_date" value="{{ old('end_date') }}" class="form-control" required>
                     @error('end_date')
                         <div class="text-danger small">{{ $message }}</div>
                     @enderror

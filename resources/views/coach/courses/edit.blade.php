@@ -25,7 +25,7 @@
             {{-- Šablona kurzu (template_id) – zatím necháme prázdné, pokud nechceme používat --}}
             <div class="mb-3">
                 <label class="form-label">Template ID (optional)</label>
-                <input type="number" name="template_id" value="{{ old('template_id', $course->template_id) }}" class="form-control">
+                <input type="number" name="template_id" value="{{ old('template_id', $course->template_id) }}" class="form-control" required>
                 @error('template_id')
                     <div class="text-danger small">{{ $message }}</div>
                 @enderror
@@ -35,14 +35,14 @@
             <div class="row g-3">
                 <div class="col-md-6">
                     <label class="form-label">Start Date</label>
-                    <input type="date" name="start_date" value="{{ old('start_date', $course->start_date?->format('Y-m-d')) }}" class="form-control">
+                    <input type="date" name="start_date" value="{{ old('start_date', $course->start_date?->format('Y-m-d')) }}" class="form-control" required>
                     @error('start_date')
                         <div class="text-danger small">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">End Date</label>
-                    <input type="date" name="end_date" value="{{ old('end_date', $course->end_date?->format('Y-m-d')) }}" class="form-control">
+                    <input type="date" name="end_date" value="{{ old('end_date', $course->end_date?->format('Y-m-d')) }}" class="form-control" required>
                     @error('end_date')
                         <div class="text-danger small">{{ $message }}</div>
                     @enderror
