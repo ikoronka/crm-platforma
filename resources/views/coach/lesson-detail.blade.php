@@ -15,7 +15,7 @@
                     <p class="text-muted small">Scheduled: {{ $lesson->scheduled_at->format('j.n.Y H:i') }}</p>
                 @endif
             </div>
-            <a href="{{ secure_url('coach.courses.manage', $lesson->course) }}" class="btn btn-sm btn-outline-secondary">
+            <a href="{{ route('coach.courses.manage', $lesson->course) }}" class="btn btn-sm btn-outline-secondary">
                 ← Back to Course
             </a>
         </div>
@@ -91,7 +91,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <form method="POST" action="{{ secure_url('coach.submissions.grade', $submission) }}" class="d-flex align-items-center">
+         <form method="POST" action="{{ route('coach.submissions.grade', $submission) }}" class="d-flex align-items-center">
                                             @csrf
                                             @method('PUT')
                                             <select name="grade" class="form-select form-select-sm">
@@ -113,7 +113,7 @@
         {{-- Tlačítko pro úpravu lekce (případně přidání/úpravu homework) --}}
         <section>
             @if(Route::has('coach.lessons.edit'))
-                <a href="{{ secure_url('coach.lessons.edit', $lesson) }}" class="btn btn-primary">
+                <a href="{{ route('coach.lessons.edit', $lesson) }}" class="btn btn-primary">
                     Edit Lesson
                 </a>
             @endif

@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
-   <form method="POST" action="{{ secure_url('student/register') }}" class="border rounded p-4 shadow w-100" style="max-width: 400px;">
+   <form method="POST" action="{{ route('student.register') }}" class="border rounded p-4 shadow w-100" style="max-width: 400px;">
         @csrf
 
         <h2 class="h4 text-center mb-3">Student sign-up</h2>
@@ -37,13 +37,13 @@
 
         <button class="btn btn-primary w-100">Sign up</button>
 
-       <a href="{{ secure_url('student/login/google') }}" class="btn btn-danger">
+       <a href="{{ route('student.login.google') }}" class="btn btn-danger">
            Login with Google
        </a>
 
        <p class="text-center mt-3 small">
             Already have an account?
-            <a href="{{ secure_url('student.login.show') }}">Log in</a>
+            <a href="{{ route('student.login.show') }}">Log in</a>
         </p>
    </form>
 </div>
