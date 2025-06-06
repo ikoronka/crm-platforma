@@ -27,9 +27,9 @@ class GoogleController extends Controller
     {
         try {
             $googleUser = Socialite::driver('google')->stateless()->user();
-            \Log::info('Google user details:', ['user' => $googleUser]);
+            Log::info('Google user details:', ['user' => $googleUser]);
         } catch (\Exception $e) {
-            \Log::error('Error during Google callback: ' . $e->getMessage());
+            Log::error('Error during Google callback: ' . $e->getMessage());
             return redirect()->route('student.login.show')->withErrors('Something went wrong during Google authentication.');
         }
 
