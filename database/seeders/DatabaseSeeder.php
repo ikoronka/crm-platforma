@@ -10,6 +10,12 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        // Admin
+        DB::table('z_admins')->insert([
+            'name' => 'Super Admin',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('password'),
+        ]);
         // Coaches
         DB::table('z_coaches')->insert([
             ['name' => 'Petr Novák', 'email' => 'petr.novak@example.com', 'oauth_provider' => 'google', 'profile_picture' => 'https://www.pngkit.com/png/detail/126-1262807_instagram-default-profile-picture-png.png'],
