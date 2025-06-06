@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 
 class GoogleController extends Controller
@@ -24,7 +25,13 @@ class GoogleController extends Controller
      */
     public function handleGoogleCallback()
     {
-        $googleUser = Socialite::driver('google')->stateless()->user();
+        try {
+            $googleUser = Socialite::driver('google')->stateless()->user();
+            \Log::info('Google user details:', ['user' => $googleUser]);
+        } catch (\Exception $e) {
+            \Log::error('Error during Google callback: ' . $e->getMessage());
+            return redirect()->route('student.login.show')->withErrors('Something went wrong during Google authentication.');
+        }
 
         $student = Student::firstOrCreate(
             ['email' => $googleUser->getEmail()],
@@ -34,6 +41,8 @@ class GoogleController extends Controller
                 'profile_picture' => $googleUser->getAvatar(),
             ]
         );
+
+        Log::info('Student created/logged in:', ['student' => $student]);
 
         Auth::guard('student')->login($student);
 
