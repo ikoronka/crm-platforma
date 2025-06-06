@@ -13,7 +13,7 @@
             <input name="email" type="email" placeholder="E-mail" class="form-control" required autofocus>
         </div>
 
-       <label for="email">Email</label>
+       <label for="password">Password</label>
         <div class="mb-3">
             <input name="password" type="password" placeholder="Password" class="form-control" required>
         </div>

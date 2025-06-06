@@ -9,26 +9,27 @@
 
         <h2 class="h4 text-center mb-3">Student sign-up</h2>
 
-        {{-- Name --}}
+       <label for="name">Name</label>
         <div class="mb-3">
             <input name="name" type="text" placeholder="Full name" class="form-control" required>
         </div>
 
-        {{-- Email --}}
+       <label for="email">Email</label>
         <div class="mb-3">
             <input name="email" type="email" placeholder="E-mail" class="form-control" required>
         </div>
 
+       <label for="birth_year">Birth Year</label>
         <div class="mb-3">
             <input name="birth_year" type="number" min="1900" max="{{ date('Y') }}" class="form-control" value="{{ old('birth_year') }}" required>
         </div>
 
-        {{-- Password --}}
+       <label for="password">Password</label>
         <div class="mb-3">
             <input name="password" type="password" placeholder="Password" class="form-control" required>
         </div>
 
-        {{-- Confirm password --}}
+       <label for="password_confirmation">Confirm password</label>
         <div class="mb-3">
             <input name="password_confirmation" type="password" placeholder="Confirm password" class="form-control" required>
         </div>
