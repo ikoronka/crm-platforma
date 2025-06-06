@@ -13,7 +13,7 @@
         </p>
 
         <div class="mt-3">
-            <a href="{{ secure_url('student.register.show') }}" class="btn btn-primary me-2">Začít zdarma</a>
+            <a href="{{ route('student.register.show') }}" class="btn btn-primary me-2">Začít zdarma</a>
         </div>
     </div>
 
