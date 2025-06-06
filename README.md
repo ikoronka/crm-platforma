@@ -11,7 +11,7 @@ npm install && npm run dev
 cp .env.example .env      # doplňte připojení k DB
 php artisan key:generate
 php artisan migrate --seed
-php artisan serve          # → http://localhost:8000
+php artisan serve          # → localhost:8000
 ```
 ## 2. přihlášení kouče
 
