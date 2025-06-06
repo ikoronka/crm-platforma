@@ -44,7 +44,7 @@ class StudentAuthController extends Controller
     ]);
 
     try {
-        Mail::to($student->email)->send(new StudentLogin($student));
+        Mail::to($request->user())->send(new StudentLogin($student));
     } catch (\Throwable $e) {
         Log::error('Failed to send registration email: ' . $e->getMessage());
     }
