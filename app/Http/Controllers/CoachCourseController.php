@@ -100,6 +100,7 @@ class CoachCourseController extends Controller
             'start_date'    => $data['start_date'] ?? null,
             'end_date'      => $data['end_date'] ?? null,
             'schedule_info' => $data['schedule_info'] ?? null,
+            'description' => $data['description'] ?? null,
         ]);
 
         return redirect()
