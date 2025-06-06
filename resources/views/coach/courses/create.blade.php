@@ -47,6 +47,13 @@
             <h1>OR</h1>
             <form action="{{ route('coach.courses.store') }}" method="POST" class="border rounded p-4 shadow mb-4">
                 <button>Copy existing course</button>
+                @forelse($courses as $course)
+                    <input type="checkbox">{{ $course->name }}</input>
+                @empty
+                <p class="text-muted">
+                    There are no courses to copy.
+                </p>
+                @endforelse
             </form>
 
 
