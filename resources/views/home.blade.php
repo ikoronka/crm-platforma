@@ -7,13 +7,13 @@
     {{-- LEVÁ STRANA – text --}}
     <div class="me-lg-5 text-center text-lg-start mb-4 mb-lg-0" style="max-width: 500px;">
         <h1 class="display-5">Welcome</h1>
+
         <p class="lead">
             Manage courses, lessons &amp; homework in one simple place.
         </p>
 
         <div class="mt-3">
             <a href="{{ route('student.register.show') }}" class="btn btn-primary me-2">Začít zdarma</a>
-            <a href="" class="btn btn-outline-secondary">Přihlásit se</a>
         </div>
     </div>
 
@@ -23,7 +23,12 @@
             <div class="carousel-inner">
                 @for ($i = 1; $i <= 3; $i++)
                     <div class="carousel-item {{ $i === 1 ? 'active' : '' }}">
-                        <img src="{{ secure_asset('images/landing-$i.jpg') }}" class="d-block w-100" alt="slide {{ $i }}" style="height: 360px; object-fit: cover;">
+                        <img
+                            src="{{ secure_asset('images/landing-' . $i . '.jpg') }}"
+                            class="d-block w-100"
+                            alt="slide {{ $i }}"
+                            style="height: 360px; object-fit: cover;"
+                        >
                     </div>
                 @endfor
             </div>
