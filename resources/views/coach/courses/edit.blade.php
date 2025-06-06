@@ -9,7 +9,7 @@
     <div class="mx-auto" style="max-width: 720px;">
         <h1 class="h3 mb-4">Edit Course: {{ $course->name }}</h1>
 
-        <form action="{{ secure_route('coach.courses.update', $course) }}" method="POST" class="border rounded p-4 shadow mb-4">
+        <form action="{{ secure_url('coach.courses.update', $course) }}" method="POST" class="border rounded p-4 shadow mb-4">
             @csrf
             @method('PUT')
 
@@ -60,11 +60,11 @@
 
             <div class="d-flex justify-content-between align-items-center mt-4">
                 <button type="submit" class="btn btn-primary">Save Changes</button>
-                <a href="{{ secure_route('coach.courses.manage', $course) }}">Cancel</a>
+                <a href="{{ secure_url('coach.courses.manage', $course) }}">Cancel</a>
             </div>
         </form>
 
-        <form method="POST" action="{{ secure_route('coach.courses.destroy', $course) }}" class="mt-3" onsubmit="return confirm('Delete this course?');">
+        <form method="POST" action="{{ secure_url('coach.courses.destroy', $course) }}" class="mt-3" onsubmit="return confirm('Delete this course?');">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-danger">Delete Course</button>

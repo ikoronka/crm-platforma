@@ -28,6 +28,6 @@ public function store(Request $request)
     ]);
 
     Lesson::create($validated);
-    return redirect()->secure_route('lessons.index');
+    return redirect()->secure_url('lessons.index');
 }
 }

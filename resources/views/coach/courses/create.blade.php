@@ -8,7 +8,7 @@
     <div class="mx-auto" style="max-width: 800px;">
         <h1 class="h3 mb-4">Create Course</h1>
 
-        <form action="{{ secure_route('coach.courses.store') }}" method="POST" class="border rounded p-4 shadow mb-4">
+        <form action="{{ secure_url('coach.courses.store') }}" method="POST" class="border rounded p-4 shadow mb-4">
             @csrf
 
             <div class="mb-3">
@@ -45,7 +45,7 @@
             </div>
 
             <h1>OR</h1>
-            <form action="{{ secure_route('coach.courses.store') }}" method="POST" class="border rounded p-4 shadow mb-4">
+            <form action="{{ secure_url('coach.courses.store') }}" method="POST" class="border rounded p-4 shadow mb-4">
                 <button>Copy existing course</button>
                 @forelse($courses as $course)
                     <input type="checkbox">{{ $course->name }}</input>

@@ -53,7 +53,7 @@ class StudentAuthController extends Controller
     Auth::guard('student')->login($student);
 
     return redirect()
-        ->secure_route('student.dashboard')
+        ->secure_url('student.dashboard')
         ->with('success', 'Vítej! Tvůj účet byl úspěšně vytvořen.');
     }
     public function redirectToGoogle()
@@ -77,7 +77,7 @@ class StudentAuthController extends Controller
 
         Auth::guard('student')->login($student);
 
-        return redirect()->secure_route('student.dashboard');
+        return redirect()->secure_url('student.dashboard');
     }
 
 
@@ -95,7 +95,7 @@ class StudentAuthController extends Controller
 
             /* zelený banner po úspěchu */
             return redirect()
-                   ->secure_route('student.dashboard')
+                   ->secure_url('student.dashboard')
                    ->with('success', 'Přihlášení proběhlo v pořádku.');
         }
 

@@ -8,7 +8,7 @@
     <div class="mx-auto" style="max-width: 720px;">
         <h1 class="h3 mb-4">Edit Lesson: {{ $lesson->title }}</h1>
 
-        <form method="POST" action="{{ secure_route('coach.lessons.update', $lesson) }}" class="border rounded p-4 shadow mb-4">
+        <form method="POST" action="{{ secure_url('coach.lessons.update', $lesson) }}" class="border rounded p-4 shadow mb-4">
             @csrf
             @method('PUT')
 
@@ -32,11 +32,11 @@
 
             <div class="d-flex justify-content-between align-items-center mt-4">
                 <button type="submit" class="btn btn-primary">Save Changes</button>
-                <a href="{{ secure_route('coach.lessons.lesson-detail', $lesson) }}">Cancel</a>
+                <a href="{{ secure_url('coach.lessons.lesson-detail', $lesson) }}">Cancel</a>
             </div>
         </form>
 
-        <form method="POST" action="{{ secure_route('coach.lessons.destroy', $lesson) }}" onsubmit="return confirm('Delete this lesson?');" class="mt-3">
+        <form method="POST" action="{{ secure_url('coach.lessons.destroy', $lesson) }}" onsubmit="return confirm('Delete this lesson?');" class="mt-3">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-danger">Delete Lesson</button>

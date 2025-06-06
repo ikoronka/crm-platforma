@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
-    <form method="POST" action="{{ secure_route('admin.login') }}" class="border rounded p-4 shadow w-100" style="max-width: 400px;">
+    <form method="POST" action="{{ secure_url('admin.login') }}" class="border rounded p-4 shadow w-100" style="max-width: 400px;">
         @csrf
         <h2 class="h4 text-center mb-3">Admin login</h2>
         <label for="email">Email</label>

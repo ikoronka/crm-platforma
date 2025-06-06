@@ -65,12 +65,12 @@
         {{-- Akční tlačítka --}}
         <div class="d-flex flex-wrap gap-2">
             {{-- Spravovat studenty --}}
-            <a href="{{ secure_route('courses.students.manage', $course->id) }}" class="btn btn-outline-secondary btn-sm">
+            <a href="{{ secure_url('courses.students.manage', $course->id) }}" class="btn btn-outline-secondary btn-sm">
                 Spravovat studenty
             </a>
 
             {{-- Otevřít/Uzavřít registraci --}}
-            <form action="{{ secure_route('courses.toggleRegistration', $course->id) }}" method="POST" class="inline-block">
+            <form action="{{ secure_url('courses.toggleRegistration', $course->id) }}" method="POST" class="inline-block">
                 @csrf
                 <button type="submit" class="btn btn-sm {{ $registrationOpen ? 'btn-warning' : 'btn-success' }}">
                     {{ $registrationOpen ? 'Uzavřít registraci' : 'Otevřít registraci' }}
@@ -78,12 +78,12 @@
             </form>
 
             {{-- Editovat kurz --}}
-            <a href="{{ secure_route('courses.edit', $course->id) }}" class="btn btn-sm btn-primary">
+            <a href="{{ secure_url('courses.edit', $course->id) }}" class="btn btn-sm btn-primary">
                 Editovat kurz
             </a>
 
             {{-- Smazat kurz --}}
-            <form action="{{ secure_route('courses.destroy', $course->id) }}" method="POST"
+            <form action="{{ secure_url('courses.destroy', $course->id) }}" method="POST"
                   onsubmit="return confirm('Opravdu chcete smazat tento kurz?');" class="inline-block">
                 @csrf
                 @method('DELETE')
@@ -93,12 +93,12 @@
             </form>
 
             {{-- Přidat domácí úkol --}}
-            <a href="{{ secure_route('homeworks.create', ['course' => $course->id]) }}" class="btn btn-sm btn-info">
+            <a href="{{ secure_url('homeworks.create', ['course' => $course->id]) }}" class="btn btn-sm btn-info">
                 Přidat domácí úkol
             </a>
 
             {{-- Otevřít seznam lekcí --}}
-            <a href="{{ secure_route('courses.lessons.index', $course->id) }}" class="btn btn-sm btn-secondary">
+            <a href="{{ secure_url('courses.lessons.index', $course->id) }}" class="btn btn-sm btn-secondary">
                 Otevřít seznam lekcí
             </a>
         </div>

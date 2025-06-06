@@ -48,7 +48,7 @@ class CoachLessonController extends Controller
 
         Lesson::create($data);
 
-        return redirect()->secure_route('coach.courses.manage', $course)
+        return redirect()->secure_url('coach.courses.manage', $course)
             ->with('success', 'Lesson created successfully.');
     }
 
@@ -80,7 +80,7 @@ class CoachLessonController extends Controller
 
         $lesson->update($data);
 
-        return redirect()->secure_route('coach.lessons.lesson-detail', $lesson)
+        return redirect()->secure_url('coach.lessons.lesson-detail', $lesson)
             ->with('success', 'Lesson updated successfully.');
     }
 
@@ -94,7 +94,7 @@ class CoachLessonController extends Controller
     {
         $lesson->delete();
 
-        return redirect()->secure_route('coach.dashboard')
+        return redirect()->secure_url('coach.dashboard')
             ->with('success', 'Lesson deleted successfully.');
     }
 

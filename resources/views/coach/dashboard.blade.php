@@ -7,7 +7,7 @@
 @section('coach-content')
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3 mb-0">Courses you are instructing:</h1>
-        <a href="{{ secure_route('coach.courses.create') }}" class="btn btn-primary btn-sm">
+        <a href="{{ secure_url('coach.courses.create') }}" class="btn btn-primary btn-sm">
             Add course
         </a>
     </div>
@@ -34,7 +34,7 @@
                     </p>
 
                     <div>
-                        <a href="{{ secure_route('coach.courses.manage', $course) }}" class="btn btn-sm btn-outline-secondary">
+                        <a href="{{ secure_url('coach.courses.manage', $course) }}" class="btn btn-sm btn-outline-secondary">
                             Detail
                         </a>
                     </div>

@@ -43,7 +43,7 @@
 
        <p class="text-center mt-3 small">
             Already have an account?
-            <a href="{{ secure_route('student.login.show') }}">Log in</a>
+            <a href="{{ secure_url('student.login.show') }}">Log in</a>
         </p>
    </form>
 </div>

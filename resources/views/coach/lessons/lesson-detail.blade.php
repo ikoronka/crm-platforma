@@ -18,8 +18,8 @@
             </p>
         </div>
         <div class="card-footer text-end">
-            <a href="{{ secure_route('coach.lessons.edit', $lesson) }}" class="btn btn-warning">Edit Lesson</a>
-            <a href="{{ secure_route('coach.dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+            <a href="{{ secure_url('coach.lessons.edit', $lesson) }}" class="btn btn-warning">Edit Lesson</a>
+            <a href="{{ secure_url('coach.dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
         </div>
     </div>
 </div>

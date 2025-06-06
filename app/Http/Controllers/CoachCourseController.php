@@ -72,7 +72,7 @@ class CoachCourseController extends Controller
         $course->save();
 
         return redirect()
-            ->secure_route('coach.courses.manage', $course)
+            ->secure_url('coach.courses.manage', $course)
             ->with('success', 'Kurz byl úspěšně upraven.');
     }
 
@@ -104,7 +104,7 @@ class CoachCourseController extends Controller
         ]);
 
         return redirect()
-            ->secure_route('coach.courses.manage', $course)
+            ->secure_url('coach.courses.manage', $course)
             ->with('success', 'Kurz úspěšně vytvořen.');
     }
 
@@ -132,7 +132,7 @@ class CoachCourseController extends Controller
         $course->delete();
 
         return redirect()
-            ->secure_route('coach.dashboard')
+            ->secure_url('coach.dashboard')
             ->with('success', 'Course deleted.');
     }
 }

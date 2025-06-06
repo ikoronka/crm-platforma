@@ -30,7 +30,7 @@
 
 
        <p class="text-center mt-3 small">
-            Coach? <a href="{{ secure_route('coach.login.show') }}">Login here</a>
+            Coach? <a href="{{ secure_url('coach.login.show') }}">Login here</a>
         </p>
    </form>
 </div>
