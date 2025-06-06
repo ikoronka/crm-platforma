@@ -13,6 +13,7 @@ use Illuminate\Validation\Rules\Password;
 use App\Mail\StudentLogin;
 use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Log;
 
 
 class StudentAuthController extends Controller
@@ -42,8 +43,11 @@ class StudentAuthController extends Controller
         'profile_picture' => 'https://www.pngkit.com/png/detail/126-1262807_instagram-default-profile-picture-png.png',
     ]);
 
-    // pošleme jednoduchý login e-mail
-    Mail::to($student->email)->send(new StudentLogin($student));
+    try {
+        Mail::to($student->email)->send(new StudentLogin($student));
+    } catch (\Throwable $e) {
+        Log::error('Failed to send registration email: ' . $e->getMessage());
+    }
 
     Auth::guard('student')->login($student);
 
