@@ -20,7 +20,7 @@
 
     <p>
         Máš rovněž k dispozici svůj profil, kam se můžeš kdykoli přihlásit: 
-        <a href="{{ url('/student/login') }}">Přihlásit se</a>.
+        <a href="{{ secure_url('/student/login') }}">Přihlásit se</a>.
     </p>
 
     <hr>

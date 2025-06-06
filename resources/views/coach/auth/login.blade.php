@@ -26,7 +26,7 @@
         <button class="btn btn-primary w-100">Log in</button>
 
         <p class="text-center mt-3 small">
-            Student? <a href="{{ route('student.login.show') }}">Login here</a>
+            Student? <a href="{{ secure_url('student/login') }}">Login here</a>
         </p>
    </form>
 </div>

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
     <div class="container">
-        <a href="{{ url('/') }}" class="navbar-brand">MyCRM</a>
+        <a href="{{ secure_url('/') }}" class="navbar-brand">MyCRM</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,10 +23,10 @@
                 {{-- Only show Student Login if no coach is logged in --}}
                 @if(!Auth::guard('coach')->check())
                 <li class="nav-item">
-                    <a href="{{ route('student.login.show') }}" class="btn btn-sm btn-outline-light">Login as Student</a>
+                    <a href="{{ secure_url('student/login') }}" class="btn btn-sm btn-outline-light">Login as Student</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('student.register.show') }}" class="btn btn-sm btn-outline-light">Make a Student account</a>
+                    <a href="{{ secure_url('student/register') }}" class="btn btn-sm btn-outline-light">Make a Student account</a>
                 </li>
                 @endif
                 @endauth
