@@ -14,6 +14,7 @@ use App\Mail\StudentLogin;
 use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Resend;
 
 
 class StudentAuthController extends Controller

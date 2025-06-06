@@ -44,6 +44,12 @@
                 </div>
             </div>
 
+            <h1>OR</h1>
+            <form action="{{ route('coach.courses.store') }}" method="POST" class="border rounded p-4 shadow mb-4">
+                <button>Copy existing course</button>
+            </form>
+
+
             <button type="submit" class="btn btn-primary w-100">Create course</button>
         </form>
     </div>
