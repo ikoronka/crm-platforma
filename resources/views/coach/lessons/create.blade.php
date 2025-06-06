@@ -8,7 +8,7 @@
     <div class="mx-auto" style="max-width: 720px;">
         <h1 class="h3 mb-4">Create Lesson for {{ $course->name }}</h1>
 
-        <form method="POST" action="{{ secure_url('coach.lessons.store', $course) }}" class="border rounded p-4 shadow mb-4">
+        <form method="POST" action="{{ route('coach.lessons.store', $course) }}" class="border rounded p-4 shadow mb-4">
             @csrf
 
             <div class="mb-3">
@@ -31,7 +31,7 @@
 
             <div class="d-flex justify-content-between align-items-center mt-4">
                 <button type="submit" class="btn btn-primary">Create Lesson</button>
-                <a href="{{ secure_url('coach.courses.manage', $course) }}">Cancel</a>
+                <a href="{{ route('coach.courses.manage', $course) }}">Cancel</a>
             </div>
         </form>
     </div>

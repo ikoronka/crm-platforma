@@ -18,7 +18,7 @@
             </p>
         </div>
         <div class="card-footer text-end">
-            <a href="{{ secure_url('student.courses.show', $lesson->course) }}" class="btn btn-secondary">Back to Course</a>
+            <a href="{{ route('student.courses.show', $lesson->course) }}" class="btn btn-secondary">Back to Course</a>
         </div>
     </div>
 </div>
