@@ -51,6 +51,25 @@
                 </li>
                 @endif
                 @endauth
+
+                {{-- === ADMIN SECTION === --}}
+                @auth('admin')
+                <li class="nav-item">
+                    <a href="{{ route('admin.dashboard') }}" class="btn btn-sm btn-light">Dashboard (Admin)</a>
+                </li>
+                <li class="nav-item">
+                    <form method="POST" action="{{ route('admin.logout') }}" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-sm btn-outline-light">Logout Admin</button>
+                    </form>
+                </li>
+                @else
+                @if(!Auth::guard('coach')->check() && !Auth::guard('student')->check())
+                <li class="nav-item">
+                    <a href="{{ route('admin.login.show') }}" class="btn btn-sm btn-outline-light">Login as Admin</a>
+                </li>
+                @endif
+                @endauth
             </ul>
         </div>
     </div>
