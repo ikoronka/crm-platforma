@@ -9,6 +9,7 @@ class Course extends Model
     protected $table = 'z_courses';
     protected $fillable = [
         'name',
+        'description',
         'template_id',
         'coach_id',
         'start_date',

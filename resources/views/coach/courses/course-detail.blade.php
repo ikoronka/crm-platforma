@@ -16,6 +16,7 @@
                     ← Back to Dashboard
                 </a>
             </div>
+            <h6>Start date: {{ $course->start_date?->format('j.n.Y') ?? 'TBA' }}</h6>
         </div>
 
         {{-- Popis kurzu --}}
