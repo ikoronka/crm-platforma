@@ -21,4 +21,5 @@
             <p class="text-muted">Momentálně nejsou žádné otevřené kurzy.</p>
         @endforelse
     </div>
+    {{ $courses->links() }}
 @endsection

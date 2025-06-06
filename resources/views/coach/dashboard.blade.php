@@ -44,4 +44,5 @@
             <p class="text-muted">You are not instructing any courses yet.</p>
         @endforelse
     </div>
+    {{ $courses->links() }}
 @endsection

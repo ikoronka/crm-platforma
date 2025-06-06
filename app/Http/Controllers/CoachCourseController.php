@@ -16,7 +16,7 @@ class CoachCourseController extends Controller
         $coach = $request->user('coach');
 
         // vezmeme kurzy patřící tomuto kouči
-        $courses = $coach->courses()->get();
+        $courses = $coach->courses()->paginate(5);
 
         return view('coach.dashboard', compact('courses'));
     }
