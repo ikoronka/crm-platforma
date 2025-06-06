@@ -81,11 +81,6 @@
                             @endif
                         </p>
                     </div>
-                    <div class="card-footer text-center">
-                        <a href="{{ route('courses.show', $course) }}" class="btn btn-primary">
-                            Learn More
-                        </a>
-                    </div>
                 </div>
             </div>
             @endforeach
