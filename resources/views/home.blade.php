@@ -23,7 +23,7 @@
             <div class="carousel-inner">
                 @for ($i = 1; $i <= 3; $i++)
                     <div class="carousel-item {{ $i === 1 ? 'active' : '' }}">
-                        <img src="{{ asset("images/landing-$i.jpg") }}" class="d-block w-100" alt="slide {{ $i }}" style="height: 360px; object-fit: cover;">
+                        <img src="{{ secure_asset('images/landing-$i.jpg') }}" class="d-block w-100" alt="slide {{ $i }}" style="height: 360px; object-fit: cover;">
                     </div>
                 @endfor
             </div>
