@@ -12,6 +12,8 @@ use App\Http\Controllers\StudentProfileController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminController;
 
 Route::view('/', 'home');
 
@@ -78,6 +80,19 @@ Route::prefix('coach')->name('coach.')->group(function () {
         // Profile settings
         Route::get('profile', [CoachProfileController::class, 'show'])->name('profile');
         Route::put('profile', [CoachProfileController::class, 'update'])->name('profile.update');
+    });
+});
+
+
+/* ==================  ADMIN  ================== */
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Authentication
+    Route::view('login', 'admin.auth.login')->name('login.show');
+    Route::post('login', [AdminAuthController::class, 'login'])->name('login');
+
+    Route::middleware('auth:admin')->group(function () {
+        Route::post('logout', [AdminAuthController::class, 'logout'])->name('logout');
+        Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     });
 });
 
