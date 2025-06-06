@@ -15,7 +15,7 @@ class StudentCourseController extends Controller
     public function index()
     {
         $student = auth()->guard('student')->user();
-        $courses = $student->courses;
+        $courses = $student->courses()->paginate(5);
 
         return view('student.dashboard', compact('courses'));
     }
@@ -25,7 +25,8 @@ class StudentCourseController extends Controller
      */
     public function open()
     {
-        $courses = Course::whereDate('start_date', '>', Carbon::today())->get();
+        $courses = Course::whereDate('start_date', '>', Carbon::today())
+            ->paginate(5);
 
         return view('student.open-courses', compact('courses'));
     }
