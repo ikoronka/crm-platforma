@@ -1,23 +1,13 @@
-# Semestrálka – quick README
+## Demo
+Aplikace běží na adrese: <https://crm-platforma-production.up.railway.app/>
 
-## 1 · Instalace
+## Testovací účty
 
-```bash
-git clone <repo-url>
-cd <repo>
-composer install
-npm install && npm run dev
+| Role   | E-mail                   | Heslo    |
+|--------|--------------------------|----------|
+| Kouč   | petr.novak@example.com   | password |
+| Admin  | admin@example.com        | password |
 
-cp .env.example .env      # doplňte připojení k DB
-php artisan key:generate
-php artisan migrate --seed
-php artisan serve          # → localhost:8000
-```
-## 2. přihlášení kouče
+---
 
-| Role  | E-mail                  | Heslo    |
-|-------|--------------------------|----------|
-| Coach | petr.novak@example.com | password |
-
-
-aplikace je spuštěna na: https://crm-platforma-production.up.railway.app/
+- dodělané https a ostatní funkce ze zkoušky
