@@ -3,10 +3,10 @@ The application runs at: <https://crm-platforma-production.up.railway.app/>
 
 ## Test accounts
 
-| Role   | Email                   | Password    |
-|--------|------------------------- -|----- -----|
-| Coach   | petr.novak@example.com   | password |
-| Admin  | admin@example.com        | password |
+| Role  | Email                 | Password |
+|--------|-----------------------|-----------|
+| Coach | petr.novak@example.com | password  |
+| Admin | admin@example.com      | password  |
 
 ---
 
