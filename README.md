@@ -1,13 +1,14 @@
 ## Demo
-Aplikace běží na adrese: <https://crm-platforma-production.up.railway.app/>
+The application runs at: <https://crm-platforma-production.up.railway.app/>
 
-## Testovací účty
+## Test accounts
 
-| Role   | E-mail                   | Heslo    |
-|--------|--------------------------|----------|
-| Kouč   | petr.novak@example.com   | password |
+| Role   | Email                   | Password    |
+|--------|------------------------- -|----- -----|
+| Coach   | petr.novak@example.com   | password |
 | Admin  | admin@example.com        | password |
 
 ---
 
-- dodělané https a ostatní funkce ze zkoušky
+This is a crm platform for IT courses for kids made as a semestral work for a web development course.
+
